@@ -9,6 +9,18 @@
 </head>
 <body>
 	<h1>짝수끼리 더하기</h1>
+	<script>
+		var n = prompt("숫자를 입력하세요");
+		var sum = 0;
+
+		for (var i=1; i<=n; i++){
+			if (i%2==1){
+				continue;
+			}
+			sum+=i;
+		}
+		document.write(`${n}까지의 짝수의 합은 ${sum}입니다.`)
+	</script>
 
 </body>
 </html>

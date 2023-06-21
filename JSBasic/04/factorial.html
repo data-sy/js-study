@@ -8,6 +8,19 @@
 	<link rel="stylesheet" href="css/factorial.css">
 </head>
 <body>
+	<script>
 
+		var n = prompt("숫자 입력", 10);
+		var nFact = 1;
+		var i = 2;
+
+		while(i<=n){
+			nFact *= i;
+			i++;
+		};
+
+		document.write(`${n}! = ${nFact}`);
+
+	</script>
 </body>
 </html>
