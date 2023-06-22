@@ -8,3 +8,4 @@ function calcSum(n) {
 }
 
 calcSum(10);
+console.log(sum);  // 블록 변수라서 
