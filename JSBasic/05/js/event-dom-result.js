@@ -8,3 +8,4 @@
 		coverImage.onmouseout = function() {
 			coverImage.style.border = "";
 		};
+		

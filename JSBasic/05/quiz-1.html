@@ -7,6 +7,17 @@
 	<title>연습문제 1</title>
 </head>
 <body>
-
+	
+	<script>
+		function sumMulti(num1, num2){
+			if (num1!=num2){
+				return num1+num2;
+			}
+			// else를 적어줘야 정확. undefined나 null처럼 다른 상황일 때 실행 안 되게 할 수 있음
+			else return num1*num2
+		}
+		console.log(sumMulti(5, 10));
+		console.log(sumMulti(10, 10));
+	</script>
 </body>
 </html>
