@@ -91,3 +91,64 @@
 <br/>
 <br/>
 
+### 8-5 웹 요소 내용과 스타일 가져와서 수정하기
+- DOM으로 CSS 속성에 접근, 수정
+  - 스타일 속성에 접근 : .style.CSS속성
+  - 하이픈(-)이 포함된 속성은 낙타기법으로 표기 : 예) backgroundColor, borderRadius
+  - 화면에 표시/감추기 속성
+    - display: block : 화면에 표시
+    - display: none : 화면에서 감추고, 그 요소가 차지하던 공간도 사라짐
+    - visibility:hidden : 화면에서 감추고, 요소가 있던 공간을 빈 상태로 남김
+    - 예) ![Alt text](image-13.png)![Alt text](image-14.png)
+- 실습 : 상품 상세설명 화면 표시/감추기
+  - product.html, product.js
+  - 이벤트 처리기를 달 요소, 실제 결과를 반영할 요소 확인
+    - [상세 설명 보기]에 클릭 이벤트를 달 거임 => id="view"
+    - [상품 상세 정보]가 보일 거임 => id="detail"
+    - 즉, "#view"요소를 누르면 "#detail"요소가 화면에 나타나는 코드
+  - 클릭이벤트가 토글로 적용되어야 함
+    - 불리언 변수 isOpen을 사용해서 조건문으로 관리
+    - 변수 선언 소스끼리 모아 두는 것이 가독성 좋으므로 맨 위에 선언
+  - Q. 내가 혼자 만들어 볼 때는 textContent 사용했는데 솔루션은 innerText 사용함. 차이는?
+    - 출처 : https://hianna.tistory.com/483
+    - innerText : 사용자에게 보여지는 텍스트 값을 읽어옴
+    - textContent : 해당 노드가 가지고 있는 텍스트 값 그대로를 읽어옴
+ 
+<br/>
+<br/>
+
+### 8-6 DOM에 요소 추가하기
+- 8-5에서는 이미 만들어져 있던 내용을 화면에서 표시/감춤. 지금은 요소 새로 표시
+- 방법
+  - 1. 어떤 노드를 DOM트리에 추가할 건지 확인
+    - 추가할 소스의 노드 파악하기
+    - ![Alt text](image-16.png)
+      - p 요소 노드
+        - class 속성 노드
+        - 텍스트 노드
+  - 2. 부모 노드에 연결해서 웹 문서에 추가/수정
+    - 새로운 노드를 만들거나 부모 노드에 연결하는 함수들![Alt text](image-15.png)
+- 함수들 살펴보기
+  - createElement("태그") : 요소 노드 만들기
+  - createTextNode("텍스트") : 텍스트 노드 만들기
+  - 부모노드.appendChild(자식노드) : 텍스트/요소 노드를 요소 노드의 자식 노드로 연결![Alt text](image-17.png)
+  - body는 document.body로 찾아갈 수 있음
+  - createAttribute("속성") : 속성 노드 만들기
+    - 노드.value = "값" : 구체적인 값 추가 
+  - 속성노드.setAttribute**Node**(요소노드) : 속성노드를 요소 노드에 연결!
+    - ![Alt text](image-18.png)
+    - Node 까먹지 말기!
+    - 그냥 setAttribute는?
+      - 속성노드와 값 한꺼번에 만드는 함수
+      - 속성노드.setAttribute(요소노드, 값)
+      - ![Alt text](image-19.png)
+- 배열(7장)을 이용해 만들었던 체크리스트를 => DOM의 노드를 이용해서 만들어보자.
+ 
+<br/>
+<br/>
+
+
+### 8-7 추가한 노드 순서 바꾸거나 삭제하기
+
+<br/>
+<br/>
