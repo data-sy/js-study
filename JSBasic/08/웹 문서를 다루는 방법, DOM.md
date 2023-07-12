@@ -36,7 +36,7 @@
   - 태그 이름을 찾아 DOM 요소에 접근
   - 엘리멘"츠" s가 붙은 것 확인 => HTMLCollection 객체 반환
 - querySelector(), querySelectorAll()
-  - id(#), class(.), 태그 이름(기호 없음) 모두 사용 가능
+  - id(#), class(.), 태그 이름(따옴표 없이 사용함) 모두 사용 가능
   - 여러 요소 가능한 class, 태그 이름에 querySelector() 사용 => 첫 번째 요소에만 접근
   - querySelectorAll() => NodeList 반환 (HTMLCollection와 똑같이 사용하면 돼)
   - ![Alt text](image-7.png)
@@ -53,6 +53,7 @@
     - 없다면 새로 추가되고, 있다면 수정됨
 - setAttribute() 함수 대신, 속성 상용 가능![Alt text](image-12.png)
 - 실습 상황 : 선택한 이미지 표시하기
+  - showBig.html, showBig.js
   - 내가 수정하려는 id, class, 태그 이름 등을 확인![Alt text](image-11.png)
   - 로직 생각하기
     - 작은 사진에 onclick 속성 추가
@@ -73,7 +74,7 @@
 - addEventListener()
   - 이벤트가 발생한 요소에 이벤트 처리기를 연결해 주는 함수
   - 한 요소에 여러 이벤트 동시에 처리 가능
-  - 특정 요소 뿐만 아니라 Document객체, Windwo객체 등 어디서든 사용 가능
+  - 특정 요소 뿐만 아니라 Document객체, Window객체 등 어디서든 사용 가능
   - ```
     // 가져온 웹 요소를 변수에 담고
     변수.addEventListener(이벤트 유형, 함수, 캡쳐 여부)
@@ -100,7 +101,7 @@
     - display: none : 화면에서 감추고, 그 요소가 차지하던 공간도 사라짐
     - visibility:hidden : 화면에서 감추고, 요소가 있던 공간을 빈 상태로 남김
     - 예) ![Alt text](image-13.png)![Alt text](image-14.png)
-- 실습 : 상품 상세설명 화면 표시/감추기
+- **실습 : 상품 상세설명 화면 표시/감추기** (토글 사용하는 논법 잘 알아두자!!)
   - product.html, product.js
   - 이벤트 처리기를 달 요소, 실제 결과를 반영할 요소 확인
     - [상세 설명 보기]에 클릭 이벤트를 달 거임 => id="view"
@@ -119,30 +120,31 @@
 
 ### 8-6 DOM에 요소 추가하기
 - 8-5에서는 이미 만들어져 있던 내용을 화면에서 표시/감춤. 지금은 요소 새로 표시
-- 방법
-  - 1. 어떤 노드를 DOM트리에 추가할 건지 확인
-    - 추가할 소스의 노드 파악하기
+- 어떤 노드를 DOM트리에 추가할 건지 확인한 뒤 부모 노드에 연결해서 웹 문서에 추가/수정
+  - 추가할 소스코드의 노드 파악
     - ![Alt text](image-16.png)
-      - p 요소 노드
-        - class 속성 노드
-        - 텍스트 노드
-  - 2. 부모 노드에 연결해서 웹 문서에 추가/수정
-    - 새로운 노드를 만들거나 부모 노드에 연결하는 함수들![Alt text](image-15.png)
-- 함수들 살펴보기
-  - createElement("태그") : 요소 노드 만들기
-  - createTextNode("텍스트") : 텍스트 노드 만들기
-  - 부모노드.appendChild(자식노드) : 텍스트/요소 노드를 요소 노드의 자식 노드로 연결![Alt text](image-17.png)
-  - body는 document.body로 찾아갈 수 있음
+  - 요소 노드 생성 -> 내부의 텍스트, 속성 등의 새로운 노드 생성 & 각각 바로 자식 노드로 추가 -> 요소 노드를 부모 노드에 추가![Alt text](image-15.png)![Alt text](image-20.png)
+- 순서대로 실제로 코드 작성해보자. (이 때, 2-2와 3 순서 바꿈)
+  - createElement("태그") : 요소 노드 만들기![Alt text](image-21.png)
+  - createTextNode("텍스트") : 텍스트 노드 만들기![Alt text](image-22.png)
+  - 부모노드.appendChild(자식노드) : 텍스트/요소 노드를 요소 노드의 자식 노드로 연결!
+    - 텍스트 노드를 요소 노드에 연결![Alt text](image-23.png)
+    - 요소 노드를 body에 연결
+      - body는 document.body로 찾아갈 수 있음![Alt text](image-17.png)
   - createAttribute("속성") : 속성 노드 만들기
-    - 노드.value = "값" : 구체적인 값 추가 
-  - 속성노드.setAttribute**Node**(요소노드) : 속성노드를 요소 노드에 연결!
-    - ![Alt text](image-18.png)
-    - Node 까먹지 말기!
+    - 노드.value = "값" : 구체적인 값 추가 ![Alt text](image-24.png)
+  - 속성노드.setAttribute**Node**(요소노드) : 속성노드를 요소 노드에 연결 (반환값은 null)
+    - Node 까먹지 말기! ![Alt text](image-25.png)
     - 그냥 setAttribute는?
-      - 속성노드와 값 한꺼번에 만드는 함수
       - 속성노드.setAttribute(요소노드, 값)
       - ![Alt text](image-19.png)
-- 배열(7장)을 이용해 만들었던 체크리스트를 => DOM의 노드를 이용해서 만들어보자.
+- 실습 : 참가 신청 명단 프로그램 만들기
+  - register-create.html, register-create.js
+  - 7장에서는 같은 문제를 배열 이용해서 해결했었음 -> 이제, DOM의 노드를 이용해서 만들어보자.
+ 
+
+
+
  
 <br/>
 <br/>
