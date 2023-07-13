@@ -177,7 +177,7 @@
 - 버튼.addEventListener("click", addList)는 버튼.onclick = addList;와 같음
   - 클릭이 들어오면, addList 함수를 실행하라
   - id값에 오타가 나니 Uncaught TypeError: Cannot read properties of null (reading 'addEventListener') 에러가 뜸 ![Alt text](image-2.png)
-  - focus() 함수 : 해당 요소에 포커수를 주는 함수. 텍스트 필드 안에 커서를 갖다 놓음
+  - focus() 함수 : 해당 요소에 포커스를 주는 함수. 텍스트 필드 안에 커서를 갖다 놓음
   - 목록 나열 ![Alt text](image-3.png)
   - 삭제 버튼의 id를 배열의 index로 맞추기![Alt text](image-4.png)
   - querySelectorAll() : 괄호 안에 지정된 이름을 가진 모든 요소 가져옴
