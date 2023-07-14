@@ -4,3 +4,4 @@
 				this.parentNode.style.color = "#ccc";
 			});
 		}
+		
