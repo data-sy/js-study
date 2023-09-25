@@ -6,7 +6,7 @@ import ProductCreate from '../views/ProductCreate.vue'
 import ProductUpdate from '../views/ProductUpdate.vue'
 import SalesList from '../views/SalesList.vue'
 import ImageInsert from '../views/ImageInsert.vue'
-
+import SpringTest from '../views/SpringTest.vue'
 
 const routes = [
   {
@@ -38,6 +38,11 @@ const routes = [
     path: '/image_insert',
     name: 'ImageInsert',
     component: ImageInsert
+  },
+  {
+    path: '/springtest',
+    name: 'Springtest',
+    component: SpringTest
   }
 ]
 
