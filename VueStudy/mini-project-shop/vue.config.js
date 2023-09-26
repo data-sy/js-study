@@ -1,27 +1,32 @@
 const { defineConfig } = require('@vue/cli-service')
 
-const target = 'http://127.0.0.1:3000';
+const target = 'http://15.164.232.32:8080';
 
 module.exports = defineConfig({
   transpileDependencies: true,
   // 멀티워드 아니어도 되게
   lintOnSave: false,
   devServer: {
-    // 이걸로 포트 번호를 3000으로 수정하는 순간 에러 빵빵 ㅠ
-    port: 8080,
+    port: 3000,
     proxy: {
-      '^/api': {
-        target,
-        changeOrigin: true
-      },
-      '^/upload': {
+      '/': {
         target,
         changeOrigin: true,
+        // 경로 없이 요청을 보내기 위해 '/'를 제거
+        pathRewrite: { '^/': '' }
       },
-      '^/download': {
-        target,
-        changeOrigin: true,
-      }
+      // '/api': {
+      //   target,
+      //   changeOrigin: true
+      // },
+      // '/upload': {
+      //   target,
+      //   changeOrigin: true,
+      // },
+      // '/download': {
+      //   target,
+      //   changeOrigin: true,
+      // }
     }
   }
 })
