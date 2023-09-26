@@ -7,6 +7,7 @@ module.exports = defineConfig({
   // 멀티워드 아니어도 되게
   lintOnSave: false,
   devServer: {
+    // 이걸로 포트 번호를 3000으로 수정하는 순간 에러 빵빵 ㅠ
     port: 8080,
     proxy: {
       '^/api': {

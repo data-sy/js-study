@@ -7,6 +7,7 @@ import ProductUpdate from '../views/ProductUpdate.vue'
 import SalesList from '../views/SalesList.vue'
 import ImageInsert from '../views/ImageInsert.vue'
 import SpringTest from '../views/SpringTest.vue'
+import ApiTest from '../views/ApiTest.vue'
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
     path: '/springtest',
     name: 'Springtest',
     component: SpringTest
+  },
+  {
+    path: '/apitest',
+    name: 'Apitest',
+    component: ApiTest
   }
 ]
 
