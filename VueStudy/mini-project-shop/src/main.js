@@ -18,6 +18,7 @@ app.mount('#app');
 
 // window.kakao.init("카카오앱키");
 
+// SpringTest.vue에서 사용. ApiTest.vue 에서는 없어도 돼
 // 스프링 서버랑 연동
 import axios from 'axios';
 axios.defaults.baseURL = "http://15.164.232.32:8080";

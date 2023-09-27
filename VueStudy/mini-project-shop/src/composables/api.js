@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function useApi() {
   // 기본 API URL을 설정합니다.
-  const baseURL = '/api/v1';
+  const baseURL = 'http://15.164.232.32:8080/api/v1';
 
   // Axios 인스턴스를 생성합니다.
   const api = axios.create({

@@ -41,12 +41,12 @@ const routes = [
     component: ImageInsert
   },
   {
-    path: '/api/v1/hello',
+    path: '/springtest',
     name: 'Springtest',
     component: SpringTest
   },
   {
-    path: '/api/v1',
+    path: '/apitest',
     name: 'Apitest',
     component: ApiTest
   }

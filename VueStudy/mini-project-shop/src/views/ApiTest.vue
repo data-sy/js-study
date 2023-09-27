@@ -4,7 +4,7 @@
       <button @click="createData">데이터 생성하기</button>
       <button @click="updateData">데이터 업데이트하기</button>
       <button @click="deleteData">데이터 삭제하기</button>
-      <div>{{ result }}</div>
+      <div>{{ data }}</div>
       <div v-if="error" style="color: red;">{{ error.message }}</div>
     </div>
 </template>
@@ -26,8 +26,9 @@
   
       // 데이터 불러오기
       async function fetchData() {
+        const teacherId = 3;
         try {
-          const response = await api.get('/students');
+          const response = await api.get(`/students?teacherId=${teacherId}`);
           data.value = response;
           error.value = null;
         } catch (err) {
@@ -38,7 +39,14 @@
   
       // 데이터 생성하기
       async function createData() {
-        const requestData = { name: '새로운 데이터' };
+        const requestData = {
+          "studentName": "api테스트",
+          "studentPhone": "01012345678",
+          "studentBirthdate": "2000-01-01",
+          "studentSchool": "",
+          "studentComments": "",
+          "teacherId": 4
+        };
         try {
           const response = await api.post('/students', requestData);
           // 생성된 데이터를 데이터 배열에 추가
@@ -54,7 +62,15 @@
   
       // 데이터 업데이트하기
       async function updateData() {
-        const requestData = { name: '업데이트된 데이터' };
+        const requestData = {
+          "studentId": 5,
+          "studentName": "업데이트",
+          "studentPhone": "01012345678",
+          "studentBirthdate": "2000-01-01",
+          "studentSchool": "",
+          "studentComments": "",
+          "teacherId": 4
+        };
         const studentId = 5; // 업데이트할 데이터의 ID
         try {
           const response = await api.put(`/students/${studentId}`, requestData);
