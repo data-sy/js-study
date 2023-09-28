@@ -5,6 +5,8 @@ import MockDataBinding from '../views/MockDataBinding.vue'
 import FormView from '../views/FormView.vue'
 import LoginView from '../views/LoginView.vue'
 import TableView from '../views/TableView.vue'
+import A from '../views/AView.vue'
+import B from '../views/BView.vue'
 
 const routes = [
   {
@@ -46,6 +48,16 @@ const routes = [
     path: '/table',
     name: 'table',
     component: TableView
+  },
+  {
+    path: '/a',
+    name: 'a',
+    component: A
+  },
+  {
+    path: '/b',
+    name: 'b',
+    component: B
   },
 ]
 
