@@ -57,7 +57,7 @@ const routes = [
   {
     path: '/b',
     name: 'b',
-    component: B
+    component: B,
   },
 ]
 
