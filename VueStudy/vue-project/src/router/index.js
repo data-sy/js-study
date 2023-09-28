@@ -7,6 +7,7 @@ import LoginView from '../views/LoginView.vue'
 import TableView from '../views/TableView.vue'
 import A from '../views/AView.vue'
 import B from '../views/BView.vue'
+import MainComponent from '../components/MainComponent.vue'
 
 const routes = [
   {
@@ -58,6 +59,11 @@ const routes = [
     path: '/b',
     name: 'b',
     component: B,
+  },
+  {
+    path: '/maincomponent',
+    name: 'maincomponent',
+    component: MainComponent
   },
 ]
 
