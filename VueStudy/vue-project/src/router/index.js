@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DataBinding from '../views/DataBinding.vue'
 import MockDataBinding from '../views/MockDataBinding.vue'
+import FormView from '../views/FormView.vue'
+import LoginView from '../views/LoginView.vue'
+import TableView from '../views/TableView.vue'
 
 const routes = [
   {
@@ -28,7 +31,22 @@ const routes = [
     path: '/mockdatabinding',
     name: 'MockDataBinding',
     component: MockDataBinding
-  }
+  },
+  {
+    path: '/form',
+    name: 'form',
+    component: FormView
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  },
+  {
+    path: '/table',
+    name: 'table',
+    component: TableView
+  },
 ]
 
 const router = createRouter({
