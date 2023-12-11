@@ -14,6 +14,9 @@ const Props = defineProps({
     default: false
   }
 });
+// 사용되지 않을 때 에러나는 것 방지
+console.log(Props.simple);
+
 const scales = ref([12, 13, 14, 15, 16]);
 const visible = ref(false);
 
