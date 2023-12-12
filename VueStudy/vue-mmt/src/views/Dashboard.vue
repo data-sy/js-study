@@ -55,6 +55,7 @@ watch(listboxLevel, (newValue) => {
         // 학습지 목록 : test 테이블에서 쿼리한 결과 받기
 });
 //대-중-소단원
+// 실제로는 api 리스펀스가 올 거야
 const treeValue = ref([{
   key: "0",
   label: "대단원",
@@ -71,7 +72,7 @@ const treeValue = ref([{
             key: "0-0-0",
             label: "소단원 1",
             data: "소단원 1 Data",
-            icon: "pi pi-fw pi-folder",
+            icon: "pi pi-fw pi-bars",
             children: []        
         }
     ]
@@ -90,13 +91,18 @@ const selectedTreeValue = ref(null);
 const listboxConcept = ref(null);
 const listboxConcepts = ref([]);
 watch(selectedTreeValue, (newValue) => {
-    // selectedTreeValue가 소단원일 때만 사용되도록
-    console.log(newValue.value);
-    // 실제로는 api 리스펀스 결과를 넣게 될 거야
-    listboxConcepts.value = [
-            { name: '단위개념 이름'},
-    ]
+    const key = Object.keys(newValue)[0];
+    // console.log(Object.keys(newValue)[0]);
+    const hyphenCnt = key.split('-').length - 1;
+    if (hyphenCnt >= 2) {
+        // 실제로는 api 리스펀스 결과를 넣게 될 거야
+        listboxConcepts.value = [
+                { name: '단위개념 이름'},
+        ]
+    }
 });
+
+
 </script>
 
 <template>
@@ -122,7 +128,7 @@ watch(selectedTreeValue, (newValue) => {
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
-            <div class="card">
+            <div class="card"> 
                 <h5> 대단원-중단원-소단원 </h5>
                 <Tree :value="treeValue" selectionMode="single" v-model:selectionKeys="selectedTreeValue"></Tree>
             </div>
@@ -132,7 +138,32 @@ watch(selectedTreeValue, (newValue) => {
                 <h5> 단위개념 목록 </h5>
                 <Listbox v-model="listboxConcept" :options="listboxConcepts" optionLabel="name" :filter="true" />
             </div>
+            <div class="card">
+                <h5> 단위개념 상세보기 </h5>
+                이건 어떤 틀로 할지...고민중.. 태그 사용한 일반테이블?
+            </div>
         </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card">
+                <router-link to="/concepttree">단위개념 보기 페이지로 이동</router-link>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card">
+                <router-link to="/diag">진단학습지 다운로드 페이지로 이동</router-link>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card">
+                <router-link to="/concepttree">학습지 정오답 입력 페이지로 이동</router-link>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card">
+                <router-link to="/concepttree">학습지 결과 분석 페이지로 이동</router-link>
+            </div>
+        </div>
+
         <div class="col-12">
             <div class="card">
                 1 하나짜리

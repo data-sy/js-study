@@ -9,6 +9,16 @@ const router = createRouter({
             component: AppLayout,
             children: [
                 {
+                    path: '/diag',
+                    name: 'diag',
+                    component: () => import('@/views/pages/DiagView.vue')
+                },
+                {
+                    path: '/concepttree',
+                    name: 'concepttree',
+                    component: () => import('@/views/pages/ConceptTree.vue')
+                },
+                {
                     path: '/',
                     name: 'dashboard',
                     component: () => import('@/views/Dashboard.vue')
@@ -153,7 +163,6 @@ const router = createRouter({
             name: 'notfound',
             component: () => import('@/views/pages/NotFound.vue')
         },
-
         {
             path: '/auth/login',
             name: 'login',
