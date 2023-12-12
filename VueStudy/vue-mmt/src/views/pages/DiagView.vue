@@ -38,6 +38,10 @@ const listboxTests = ref([]);
                 여기는 이미지 가져와서 가로 두 칸에 나눠 넣기
                 순서는 item_number 대로
                 페이지 넘겨서 답안 목록
+                <h5>Image</h5>
+                <div class="flex justify-content-center">
+                    <Image :src="'demo/images/galleria/galleria11.jpg'" alt="Image" width="250" preview />
+                </div>
             </div>
         </div>
     </div>

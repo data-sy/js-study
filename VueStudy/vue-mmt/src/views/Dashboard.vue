@@ -102,6 +102,15 @@ watch(selectedTreeValue, (newValue) => {
     }
 });
 
+// 다운로드 확인 창
+const displayConfirmation = ref(false);
+const openConfirmation = () => {
+    displayConfirmation.value = true;
+};
+const closeConfirmation = () => {
+    displayConfirmation.value = false;
+};
+
 
 </script>
 
@@ -123,8 +132,12 @@ watch(selectedTreeValue, (newValue) => {
                 <SelectButton v-model="selectButtonLevel" :options="selectButtonLevels" optionLabel="name" />
             </div>
             <div class="card">
+                <!-- 사이즈 반응형으로 바꾸기 -->
+                <ScrollPanel :style="{ width: '250px', height: '200px' }">
                 <h5> Grade Level </h5>
                 <Listbox v-model="listboxLevel" :options="listboxLevels" optionLabel="name" />
+                <ScrollTop target="parent" :threshold="100" icon="pi pi-arrow-up"></ScrollTop>
+                </ScrollPanel>
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
@@ -155,14 +168,47 @@ watch(selectedTreeValue, (newValue) => {
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card">
-                <router-link to="/concepttree">학습지 정오답 입력 페이지로 이동</router-link>
+                <router-link to="/record">학습지 정오답 입력 페이지로 이동</router-link>
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card">
-                <router-link to="/concepttree">학습지 결과 분석 페이지로 이동</router-link>
+                <router-link to="/result">학습지 결과 분석 페이지로 이동</router-link>
             </div>
         </div>
+        <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
+            <Button label="이전으로" class="mr-2 mb-2"></Button>
+        </div>
+        <div class="col">빈</div>
+        <div class="col">공</div>
+        <div class="col">간</div>
+        <div class="col">!</div>
+        <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
+            <Button label="다음으로" class="mr-2 mb-2"></Button>
+        </div>           
+
+        <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
+            <Button label="이전으로" class="mr-2 mb-2"></Button>
+        </div>
+        <div class="col">빈</div>
+        <div class="col">공</div>
+        <div class="col">간</div>
+        <div class="col">!</div>
+        <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
+            <Button label="다운로드" icon="pi pi-check" class="mr-2 mb-2" @click="openConfirmation" />
+                <Dialog header="학습지 다운로드" v-model:visible="displayConfirmation" :style="{ width: '350px' }" :modal="true">
+                    <div class="flex align-items-center justify-content-center">
+                        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                        <span>Are you sure you want to proceed?</span>
+                    </div>
+                    <template #footer>
+                        <Button label="No" icon="pi pi-times" @click="closeConfirmation" class="p-button-text" />
+                        <Button label="Yes" icon="pi pi-check" @click="closeConfirmation" class="p-button-text" autofocus />
+                    </template>
+                </Dialog>
+        </div>     
+
+
 
         <div class="col-12">
             <div class="card">
@@ -207,6 +253,13 @@ watch(selectedTreeValue, (newValue) => {
         <div class="col-12 xl:col-3">
             <div class="card">
                 4 하나
+            </div>
+        </div>
+        <div class="col-12 xl:col-6"> <!--A-->
+            <div class="col-12 lg:col-6 xl:col-3"> <!--B-->
+                <div class="card">
+                    div 중첩
+                </div>
             </div>
         </div>
     </div>
