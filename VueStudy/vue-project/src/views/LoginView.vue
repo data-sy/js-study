@@ -15,38 +15,28 @@
   <div>{{ data }}</div>
   <div v-if="error" style="color: red">{{ error.message }}</div>
 </template>
-<script>
 
-import { ref } from "vue";
-import { useApi } from "../composables/api.js";
+<script setup>
+import { ref } from 'vue';
+import { useApi } from '../composables/api.js';
 
-export default {
+const api = useApi();
+const data = ref(null);
+const error = ref(null);
+const requestData = {
+  userEmail: '',
+  userPassword: '',
+};
 
-  setup() {
-    const api = useApi();
-    const data = ref(null);
-    const error = ref(null);
-    const requestData = {
-        userEmail: '',    
-        userPassword: '', 
-    };
-    async function login() {
-      try {
-        const response = await api.post("/authenticate", requestData);
-        data.value = response;
-        error.value = null;
-      } catch (err) {
-        console.error("데이터 생성 중 에러 발생:", err);
-        error.value = err;
-      }
-    }
-    return {
-      data,
-      error,
-      login,
-      requestData,
-    };
-  },
+const login = async () => {
+  try {
+    const response = await api.post('/authenticate', requestData);
+    data.value = response;
+    error.value = null;
+  } catch (err) {
+    console.error('데이터 생성 중 에러 발생:', err);
+    error.value = err;
+  }
 };
 
 </script>

@@ -3,6 +3,32 @@
   <button @click="goToNextPage">다음</button>
 </template>
 
+<script setup>
+// import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const data = {
+  dataId: 3,
+  dataName : "이름이당"
+}
+// const data = reactive({
+//   userId: 3,
+//   userTestId: 10
+// });
+
+const router = useRouter()
+
+const goToNextPage = () => {
+  router.push({
+    name: 'b',
+    state: { dataToSend: data },
+  })
+};
+
+</script>
+
+
+<!-- 
 <script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -41,4 +67,4 @@ export default {
   }
 };
 
-</script>
+</script> -->

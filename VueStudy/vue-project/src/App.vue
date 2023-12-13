@@ -1,7 +1,13 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Home</router-link>
+    <router-link to="/databinding">databinding</router-link>
+    <router-link to="/form">form</router-link>
+    <router-link to="/login">login</router-link> 
+    <router-link to="/table">table</router-link>
+    <router-link to="/a">a</router-link>
+    <router-link to="/b">b</router-link>     
+    <router-link to="/maincomponent">maincomponent</router-link>     
   </nav>
   <router-view/>
 </template>

@@ -45,7 +45,7 @@
     <div v-bind:style="[baseStyle, addStyle]"> 인라인 스타일 바인딩2 </div>
     
 </template>
-<script>
+<!-- <script>
 export default {
     data() {
         return {
@@ -80,7 +80,35 @@ export default {
         }
     }
 }
+</script> -->
+
+<script setup>
+const title = 'World!!!';
+const htmlString = '<p style="color:red">HTML 바인딩으로 글자 색 빨갛게</p>';
+let valueModel = '사용자에게 텍스트 입력받기';
+let numberModel = 10;
+const message = `여러 줄을 입력하는 textarea는 \${valueModel} 아님. 얘도 v-model`;
+let city = '064';
+let checked = true;
+const checkedList = [];
+let picked = '';
+const radioValue1 = '서울';
+const radioValue2 = '광주';
+const radioValue3 = '제주';
+const imgSrc = 'https://kr.vuejs.org/images/logo.png';
+let textValue = '';
+const isActive = true;
+const hasError = false;
+const activeClass = 'active';
+const errorClass = 'text-red';
+const styleObject = {
+  color: 'blue',
+  fontSize: '30px',
+};
+const baseStyle = 'background-color:lightgray;width:100%;height:100px;';
+const addStyle = 'color:green;font-weight:bold;';
 </script>
+
 <style scoped>
     container {
         width : 100%;

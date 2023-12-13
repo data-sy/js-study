@@ -7,7 +7,34 @@
   </div>
 
 </template>
-<script>
+
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const receivedData = ref('')
+const dataToSend = history.state.dataToSend;
+
+onMounted(() => {
+  if (dataToSend) {
+    console.log(dataToSend);
+    // dataToSend 변수에 데이터가 들어있는지 확인하고 사용할 수 있습니다.
+    receivedData.value = dataToSend
+    // console.log("receivedData", receivedData);
+  }
+})
+
+const goBack = () => {
+  // 이전 페이지로 돌아가기
+  router.go(-1) // 또는 router.back()
+}
+
+</script>
+
+
+<!-- <script>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -43,4 +70,4 @@ export default {
     }
   }
 }
-</script>
+</script> -->
