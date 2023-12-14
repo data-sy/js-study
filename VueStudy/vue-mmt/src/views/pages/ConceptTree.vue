@@ -35,6 +35,7 @@ const goBack = () => {
         <div class="col-12">
             <div class="card">
                 <h5> 단위개념 TREE </h5>
+                <p>받은 데이터: {{ receivedData }}</p>
             </div>
         </div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">

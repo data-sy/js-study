@@ -25,29 +25,29 @@ const closeConfirmation = () => {
                 </div>
             </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-3">
+        <div class="col-12 lg:col-6 xl:col-6">
             <div class="card">
                 <router-link to="/conceptlist">단위개념 목록 페이지로 이동</router-link>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-6">
+            <div class="card">
+                <router-link to="/diag">진단학습지 다운로드 페이지로 이동</router-link>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-6">
+            <div class="card">
+                <router-link to="/record">학습지 정오답 입력 페이지로 이동</router-link>
+            </div>
+        </div>
+        <div class="col-12 lg:col-6 xl:col-6">
+            <div class="card">
+                <router-link to="/result">학습지 결과 분석 페이지로 이동</router-link>
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card">
                 <router-link to="/concepttree">단위개념 보기 페이지로 이동</router-link>
-            </div>
-        </div>
-        <div class="col-12 lg:col-6 xl:col-3">
-            <div class="card">
-                <router-link to="/diag">진단학습지 다운로드 페이지로 이동</router-link>
-            </div>
-        </div>
-        <div class="col-12 lg:col-6 xl:col-3">
-            <div class="card">
-                <router-link to="/record">학습지 정오답 입력 페이지로 이동</router-link>
-            </div>
-        </div>
-        <div class="col-12 lg:col-6 xl:col-3">
-            <div class="card">
-                <router-link to="/result">학습지 결과 분석 페이지로 이동</router-link>
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
@@ -100,12 +100,12 @@ const closeConfirmation = () => {
                 1 하나짜리
             </div>
         </div>
-        <div class="col-12 xl:col-6">
+        <div class="col-12 lg:col-6 xl:col-6">
             <div class="card">
                 2 두개로
             </div>
         </div>
-        <div class="col-12 xl:col-6">
+        <div class="col-12 lg:col-6 xl:col-6">
             <div class="card">
                 2 두개로
             </div>
