@@ -9,6 +9,11 @@ const router = createRouter({
             component: AppLayout,
             children: [
                 {
+                    path: '/maincomponent',
+                    name: 'maincomponent',
+                    component: () => import('@/components/MainComponent.vue')
+                },
+                {
                     path: '/record',
                     name: 'record',
                     component: () => import('@/views/pages/RecordView.vue')
@@ -27,6 +32,11 @@ const router = createRouter({
                     path: '/concepttree',
                     name: 'concepttree',
                     component: () => import('@/views/pages/ConceptTree.vue')
+                },
+                {
+                    path: '/conceptlist',
+                    name: 'conceptlist',
+                    component: () => import('@/views/pages/ConceptList.vue')
                 },
                 {
                     path: '/',

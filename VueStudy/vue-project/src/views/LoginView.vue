@@ -30,7 +30,7 @@ const requestData = {
 
 const login = async () => {
   try {
-    const response = await api.post('/authenticate', requestData);
+    const response = await api.post('/authentication', requestData);
     data.value = response;
     error.value = null;
   } catch (err) {
