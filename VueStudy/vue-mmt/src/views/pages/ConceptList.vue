@@ -5,14 +5,18 @@ import { useApi } from '../../composables/api.js';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 import levelDic from '@/assets/data/level.json';
+import { registerables } from 'chart.js';
+// import MathJax from 'mathjax';
 
 // schoolLevel
 const selectButtonLevel = ref(null);
 const selectButtonLevels = ref([{ name: '초등' }, { name: '중등' }, { name: '고등' }]);
+const treeValue = ref(null);
 // gradeLevel
 const listboxLevel = ref(null);
 const listboxLevels = ref([]);
-watch(selectButtonLevel, (newValue) => {
+watch(selectButtonLevel, (newValue, oldValue) => {
+    console.log(`selectButtonLevel이 변경되었습니다. 새 값: ${newValue}, 이전 값: ${oldValue}`);
     if (newValue.name === '초등') {
         listboxLevels.value = levelDic['초등'];
     } else if (newValue.name === '중등') {
@@ -20,11 +24,14 @@ watch(selectButtonLevel, (newValue) => {
     } else if (newValue.name === '고등') {
         listboxLevels.value = levelDic['고등'];
     }
+    if (oldValue!==null && newValue.name !== oldValue.name){
+        treeValue.value = null;
+    }
 });
+
 // chapeterLevel
 const api = useApi();
 const error = ref(null);
-const treeValue = ref(null);
 watch(listboxLevel, async (newValue) => {
     const grade = newValue.grade;
     const semester = newValue.semester;
@@ -43,8 +50,6 @@ watch(listboxLevel, async (newValue) => {
         error.value = err;
     }
 });
-// 추가) school_level 값이 바뀌면 treeValue를 리셋하도록?! (트리 열어둔 것 초기화 되도록)
-
 
 // 단위개념목록
 const selectedTreeValue = ref(null);
@@ -74,6 +79,8 @@ watch(listboxConcept, async (newValue) => {
     conceptId.value = conceptDetail.value.conceptId;
     console.log(conceptId.value);
 });
+
+// 추가) LaTex 적용
 
 // '이전' 버튼 (홈으로)
 const router = useRouter()
@@ -118,14 +125,16 @@ const confirmPopup = useConfirm();
 const confirm = (event) => {
     confirmPopup.require({
         target: event.target,
-        message: 'Are you sure you want to proceed?',
+        message: '단위개념을 선택해주세요.',
         icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Ok',
+        rejectLabel: ' ',
         accept: () => {
             toast.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
         },
-        reject: () => {
-            toast.add({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-        }
+        // reject: () => {
+        //     toast.add({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        // }
     });
 };  
 </script>
@@ -158,11 +167,75 @@ const confirm = (event) => {
                 <Listbox v-model="listboxConcept" :options="listboxConcepts" optionLabel="conceptName" :filter="true" />
             </div>
             <div class="card">
+                <div class="surface-section" v-if="conceptDetail">
+                    <div class="font-medium text-4xl text-900 mb-3">{{ conceptDetail.conceptName }}</div>
+                    <div class="text-500 mb-5"></div>
+                    <ul class="list-none p-0 m-0">
+                        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">개념설명</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ conceptDetail.conceptDescription }}</div>
+                            <!-- <div class="w-6 md:w-2 flex justify-content-end">
+                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
+                            </div> -->
+                        </li>
+                        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">성취기준</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ conceptDetail.conceptAchievementName }}</div>
+                            <!-- <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                나중에 영역은 이 아이콘으로 넣자
+                                    <Chip label="Crime" class="mr-2"></Chip>
+                                <Chip label="Drama" class="mr-2"></Chip>
+                                <Chip label="Thriller"></Chip> 
+                            </div> -->
+                            <!-- <div class="w-6 md:w-2 flex justify-content-end">
+                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
+                            </div> -->
+                        </li>
+                        <!-- <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">Director</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">Michael Mann</div>
+                            <div class="w-6 md:w-2 flex justify-content-end">
+                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
+                            </div>
+                        </li>
+                        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">Actors</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">Robert De Niro, Al Pacino</div>
+                            <div class="w-6 md:w-2 flex justify-content-end">
+                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
+                            </div>
+                        </li>
+                        <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">Plot</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">
+                                A group of professional bank robbers start to feel the heat from police
+                                when they unknowingly leave a clue at their latest heist.</div>
+                            <div class="w-6 md:w-2 flex justify-content-end">
+                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="surface-section" v-else>
+                    <div class="font-medium text-3xl text-900 mb-3 text-blue-500"> 단위개념을 선택해주세요 </div>
+                    <div class="text-500 mb-5">  </div>
+                    <ul class="list-none p-0 m-0">
+                        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">개념설명</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1"></div>
+                        </li>
+                        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">성취기준</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="card">
                 <h5> 단위개념 상세보기 </h5>
                 이건 어떤 틀로 할지...고민중.. 태그 사용한 일반테이블?
                 {{ conceptDetail }}
-
-            </div>
+            </div> -->
         </div>
 
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
@@ -176,6 +249,5 @@ const confirm = (event) => {
             <Button v-else @click="goToNextPage" label="선수지식 확인"  class="mr-2 mb-2"></Button>
         </div>
     </div>
-
 
 </template>

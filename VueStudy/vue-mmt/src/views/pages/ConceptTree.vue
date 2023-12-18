@@ -56,4 +56,3 @@ const goToHome = () => {
         </div>     
     </div>
 </template>
-
