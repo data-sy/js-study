@@ -71,6 +71,7 @@ watch(selectedTreeValue, async (newValue) => {
     }
 });
 
+
 // 단위개념 상세보기
 const conceptId = ref(null);
 const conceptDetail = ref(null);
@@ -130,7 +131,7 @@ const confirm = (event) => {
         acceptLabel: 'Ok',
         rejectLabel: ' ',
         accept: () => {
-            toast.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+            toast.add({ severity: 'info', summary: 'Confirmed', detail: '단위개념을 선택하면 선수지식을 확인할 수 있습니다.', life: 3000 });
         },
         // reject: () => {
         //     toast.add({ severity: 'info', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
@@ -148,11 +149,11 @@ const confirm = (event) => {
             </div>
             <div class="card">
                 <!-- 사이즈 반응형으로 바꾸기 -->
-                <ScrollPanel :style="{ width: '250px', height: '200px' }">
+                <!-- <ScrollPanel :style="{ width: '250px', height: '200px' }"> -->
                 <h5> Grade Level </h5>
                 <Listbox v-model="listboxLevel" :options="listboxLevels" optionLabel="name" />
-                <ScrollTop target="parent" :threshold="100" icon="pi pi-arrow-up"></ScrollTop>
-                </ScrollPanel>
+                <!-- <ScrollTop target="parent" :threshold="100" icon="pi pi-arrow-up"></ScrollTop>
+                </ScrollPanel> -->
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
@@ -167,53 +168,24 @@ const confirm = (event) => {
                 <Listbox v-model="listboxConcept" :options="listboxConcepts" optionLabel="conceptName" :filter="true" />
             </div>
             <div class="card">
-                <div class="surface-section" v-if="conceptDetail">
+                <div class="surface-section" v-if="conceptDetail"> <!-- conceptDetail자리에 testData 사용-->
                     <div class="font-medium text-4xl text-900 mb-3">{{ conceptDetail.conceptName }}</div>
                     <div class="text-500 mb-5"></div>
                     <ul class="list-none p-0 m-0">
                         <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
                             <div class="text-500 w-6 md:w-2 font-medium">개념설명</div>
                             <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ conceptDetail.conceptDescription }}</div>
-                            <!-- <div class="w-6 md:w-2 flex justify-content-end">
-                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
-                            </div> -->
-                        </li>
-                        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
-                            <div class="text-500 w-6 md:w-2 font-medium">성취기준</div>
-                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ conceptDetail.conceptAchievementName }}</div>
-                            <!-- <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
-                                나중에 영역은 이 아이콘으로 넣자
-                                    <Chip label="Crime" class="mr-2"></Chip>
-                                <Chip label="Drama" class="mr-2"></Chip>
-                                <Chip label="Thriller"></Chip> 
-                            </div> -->
-                            <!-- <div class="w-6 md:w-2 flex justify-content-end">
-                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
-                            </div> -->
                         </li>
                         <!-- <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
-                            <div class="text-500 w-6 md:w-2 font-medium">Director</div>
-                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">Michael Mann</div>
-                            <div class="w-6 md:w-2 flex justify-content-end">
-                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
-                            </div>
-                        </li>
-                        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
-                            <div class="text-500 w-6 md:w-2 font-medium">Actors</div>
-                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">Robert De Niro, Al Pacino</div>
-                            <div class="w-6 md:w-2 flex justify-content-end">
-                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
-                            </div>
-                        </li>
-                        <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
-                            <div class="text-500 w-6 md:w-2 font-medium">Plot</div>
-                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">
-                                A group of professional bank robbers start to feel the heat from police
-                                when they unknowingly leave a clue at their latest heist.</div>
-                            <div class="w-6 md:w-2 flex justify-content-end">
-                                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"></Button>
+                            <div class="text-500 w-6 md:w-2 font-medium">영역</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                <Chip v-for="section in conceptDetail.conceptSection" :label="section" class="mr-2" :key="section" />
                             </div>
                         </li> -->
+                        <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">성취기준</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ conceptDetail.conceptAchievementName }}</div>
+                        </li>
                     </ul>
                 </div>
                 <div class="surface-section" v-else>
@@ -224,18 +196,17 @@ const confirm = (event) => {
                             <div class="text-500 w-6 md:w-2 font-medium">개념설명</div>
                             <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1"></div>
                         </li>
-                        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                        <!-- <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                            <div class="text-500 w-6 md:w-2 font-medium">영역</div>
+                            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1"></div>
+                        </li> -->
+                        <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
                             <div class="text-500 w-6 md:w-2 font-medium">성취기준</div>
                             <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1"></div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <!-- <div class="card">
-                <h5> 단위개념 상세보기 </h5>
-                이건 어떤 틀로 할지...고민중.. 태그 사용한 일반테이블?
-                {{ conceptDetail }}
-            </div> -->
         </div>
 
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
