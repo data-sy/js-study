@@ -2,13 +2,106 @@
 // 링크 전 화면에서 데이터 가져오는 것 해보기
 
 import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router'
+import { useApi } from '../../composables/api.js';
+import levelDic from '@/assets/data/level.json';
 
+const api = useApi();
+
+// schoolLevel
 const selectButtonLevel = ref(null);
 const selectButtonLevels = ref([{ name: '초등' }, { name: '중등' }, { name: '고등' }]);
+// gradeLevel
 const listboxLevel = ref(null);
 const listboxLevels = ref([]);
+const listboxTestsAll = ref(null);
+watch(selectButtonLevel, async (newValue) => {
+    if (newValue.name === '초등') {
+        listboxLevels.value = levelDic['초등'];
+    } else if (newValue.name === '중등') {
+        listboxLevels.value = levelDic['중등'];
+    } else if (newValue.name === '고등') {
+        listboxLevels.value = levelDic['고등'];
+    }
+    try {
+        const endpoint = `/tests/school-level/${newValue.name}`;
+        const response = await api.get(endpoint);
+        listboxTestsAll.value = response
+    } catch (err) {
+        console.error('데이터 생성 중 에러 발생:', err);
+    }    
+});
 const listboxTest = ref(null);
 const listboxTests = ref([]);
+
+// 학습지 목록
+watch(listboxLevel, (newValue) => {
+    const grade = newValue.grade;
+    const semester = newValue.semester;
+    if (listboxTestsAll.value) {
+        const filteredTests = listboxTestsAll.value.filter(test => {
+            return test.testGradeLevel === grade && test.testSemester === semester;
+        });
+        listboxTests.value = filteredTests
+    }
+
+});
+
+// 학습지 미리보기
+const testDetail = ref([]);
+watch(listboxTest, async (newValue) => {
+    try {
+        const endpoint = `/tests/${newValue.testId}`;
+        const response = await api.get(endpoint);
+        testDetail.value = response
+    } catch (err) {
+        console.error('데이터 생성 중 에러 발생:', err);
+    }    
+});
+
+// '이전' 버튼 (홈으로)
+const router = useRouter()
+const goToHome = () => {
+  try {
+    router.push({ path: '/' }); 
+  } catch (error) {
+    console.error('에러 발생:', error);
+  }
+};
+// 다운로드 확인 창
+const displayConfirmation = ref(false);
+const openConfirmation = () => {
+    displayConfirmation.value = true;
+};
+const closeConfirmation = () => {
+    displayConfirmation.value = false;
+};
+// yes 버튼 클릭 시 진단학습지 다운로드
+// 다운로드
+// const download = () => {
+//   // download 동작 정의
+//   const imageSrc = $refs.image.src;
+//   const link = document.createElement('a');
+//   link.href = imageSrc;
+//   link.download = 'image.jpg'; // 다운로드될 파일명
+//   link.click();
+// };
+// create api
+const postData = async () => {
+  try {
+    const endpoint = `/tests/${listboxTest.testId}`;
+    await api.post(endpoint);
+  } catch (err) {
+    console.error(`POST ${endpoint} failed:`, err);
+  }
+};
+const yesClick = () => {
+  closeConfirmation(); // 첫 번째 이벤트 핸들러에서 실행할 동작
+  goToHome();
+//   download(); // 두 번째 이벤트 핸들러에서 실행할 동작
+  // create api 추가
+  postData();
+};
 
 </script>
 
@@ -27,12 +120,13 @@ const listboxTests = ref([]);
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card"> 
                 <h5> 학습지 목록 </h5>
-                <Listbox v-model="listboxTest" :options="listboxTests" optionLabel="name" :filter="true"/>
+                <Listbox v-model="listboxTest" :options="listboxTests" optionLabel="testName" :filter="true"/>
             </div>
         </div>
         <div class="col-12 xl:col-6">
             <div class="card"> 
                 <h5> 학습지 미리보기 </h5>
+                {{ testDetail }}
                 해당 카드의 절반 사이즈의 div 만들고
                 A4비율에 맞춰서 문항 6개 표현하기
                 여기는 이미지 가져와서 가로 두 칸에 나눠 넣기
@@ -40,9 +134,26 @@ const listboxTests = ref([]);
                 페이지 넘겨서 답안 목록
                 <h5>Image</h5>
                 <div class="flex justify-content-center">
-                    <Image :src="'demo/images/galleria/galleria11.jpg'" alt="Image" width="250" preview />
+                    <Image :src="'demo/images/galleria/galleria11.jpg'" ref="image" alt="Image" width="250" preview />
                 </div>
             </div>
         </div>
+        <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
+            <Button @click="goToHome" label="이전" class="mr-2 mb-2"></Button>
+        </div>
+        <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-6 xl:col-8">빈공간</div>
+        <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
+            <Button label="다운로드" icon="pi pi-check" class="mr-2 mb-2" @click="openConfirmation" />
+                <Dialog header="학습지 다운로드" v-model:visible="displayConfirmation" :style="{ width: '350px' }" :modal="true">
+                    <div class="flex align-items-center justify-content-center">
+                        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                        <span>Are you sure you want to proceed?</span>
+                    </div>
+                    <template #footer>
+                        <Button label="No" icon="pi pi-times" @click="closeConfirmation" class="p-button-text" />
+                        <Button label="Yes" icon="pi pi-check" @click="yesClick" class="p-button-text" autofocus />
+                    </template>
+                </Dialog>
+        </div>     
     </div>
 </template>

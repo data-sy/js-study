@@ -9,6 +9,11 @@ const router = createRouter({
             component: AppLayout,
             children: [
                 {
+                    path: '/download',
+                    name: 'download',
+                    component: () => import('@/views/Download.vue')
+                },
+                {
                     path: '/maincomponent',
                     name: 'maincomponent',
                     component: () => import('@/components/MainComponent.vue')

@@ -18,6 +18,15 @@ const goBack = () => {
   // 이전 페이지로 돌아가기
   router.go(-1) // 또는 router.back()
 }
+
+// 홈으로
+const goToHome = () => {
+  try {
+    router.push({ path: '/' }); 
+  } catch (error) {
+    console.error('에러 발생:', error);
+  }
+};
 </script>
 
 <template>
@@ -43,7 +52,7 @@ const goBack = () => {
         </div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-6 xl:col-8">빈공간</div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
-            <Button label="홈으로" class="mr-2 mb-2"></Button>
+            <Button @click="goToHome" label="홈으로" class="mr-2 mb-2"></Button>
         </div>     
     </div>
 </template>

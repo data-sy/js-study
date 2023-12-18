@@ -1,10 +1,10 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
-import levelDic from '@/assets/data/level.json';
 import { useApi } from '../../composables/api.js';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
+import levelDic from '@/assets/data/level.json';
 
 // schoolLevel
 const selectButtonLevel = ref(null);
@@ -75,8 +75,16 @@ watch(listboxConcept, async (newValue) => {
     console.log(conceptId.value);
 });
 
-// '다음' 버튼 : api & 화면이동
+// '이전' 버튼 (홈으로)
 const router = useRouter()
+const goToHome = () => {
+  try {
+    router.push({ path: '/' }); 
+  } catch (error) {
+    console.error('에러 발생:', error);
+  }
+};
+// '다음' 버튼 : api & 화면이동
 const goToNextPage = async () => {
     try {
         const nodesEndpoint = `/concepts/nodes/${conceptDetail.value.conceptId}`;
@@ -158,7 +166,7 @@ const confirm = (event) => {
         </div>
 
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
-            <Button label="이전" class="mr-2 mb-2"></Button>
+            <Button @click="goToHome" label="이전" class="mr-2 mb-2"></Button>
         </div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-6 xl:col-8">빈공간</div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">

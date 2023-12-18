@@ -10,7 +10,6 @@ const closeConfirmation = () => {
     displayConfirmation.value = false;
 };
 
-
 </script>
 
 <template>
@@ -57,6 +56,7 @@ const closeConfirmation = () => {
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card">
+                <router-link to="/download"> 다운로드 페이지로 이동</router-link>
             </div>
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
@@ -81,16 +81,16 @@ const closeConfirmation = () => {
         <div class="col">!</div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
             <Button label="다운로드" icon="pi pi-check" class="mr-2 mb-2" @click="openConfirmation" />
-                <Dialog header="학습지 다운로드" v-model:visible="displayConfirmation" :style="{ width: '350px' }" :modal="true">
-                    <div class="flex align-items-center justify-content-center">
-                        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-                        <span>Are you sure you want to proceed?</span>
-                    </div>
-                    <template #footer>
-                        <Button label="No" icon="pi pi-times" @click="closeConfirmation" class="p-button-text" />
-                        <Button label="Yes" icon="pi pi-check" @click="closeConfirmation" class="p-button-text" autofocus />
-                    </template>
-                </Dialog>
+            <Dialog header="학습지 다운로드" v-model:visible="displayConfirmation" :style="{ width: '350px' }" :modal="true">
+                <div class="flex align-items-center justify-content-center">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                    <span>Are you sure you want to proceed?</span>
+                </div>
+                <template #footer>
+                    <Button label="No" icon="pi pi-times" @click="closeConfirmation" class="p-button-text" />
+                    <Button label="Yes" icon="pi pi-check" @click="closeConfirmation" class="p-button-text" autofocus />
+                </template>
+            </Dialog>
         </div>     
 
 
