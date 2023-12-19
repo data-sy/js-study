@@ -143,7 +143,7 @@ const yesClick = () => {
         </div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-6 xl:col-8">빈공간</div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
-            <Button label="다운로드" icon="pi pi-check" class="mr-2 mb-2" @click="openConfirmation" />
+            <Button label="다운로드" icon="pi pi-download" class="mr-2 mb-2" @click="openConfirmation" />
                 <Dialog header="학습지 다운로드" v-model:visible="displayConfirmation" :style="{ width: '350px' }" :modal="true">
                     <div class="flex align-items-center justify-content-center">
                         <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />

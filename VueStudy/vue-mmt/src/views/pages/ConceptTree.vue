@@ -52,7 +52,7 @@ const goToHome = () => {
         </div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-6 xl:col-8">빈공간</div>
         <div class="col-4 xs:col-4 sm:col-4 md:col-4 lg:col-3 xl:col-2">
-            <Button @click="goToHome" label="홈으로" class="mr-2 mb-2"></Button>
+            <Button @click="goToHome" label="홈으로" icon="pi pi-home" class="mr-2 mb-2"></Button>
         </div>     
     </div>
 </template>

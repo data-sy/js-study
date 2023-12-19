@@ -19,7 +19,18 @@ const closeConfirmation = () => {
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3"> 페이지 설명</span>
-                        <div class="text-900 font-medium text-xl">여기에 설명을 적자</div>
+                        <div class="text-900 font-medium text-xl">여기에 설명을 적자.</div>
+                        <div>
+                            <i class="pi pi-github" > </i>
+                            <i class="pi pi-link" > </i>
+                            푸터에 링크 아이콘으로 노션 이력서 링크, 깃허브 아이콘으로 깃허브 주소 링크
+                        </div>
+                        <div>
+                            <i class="pi pi-question-circle"></i>
+                            <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+                            <i class="pi pi-user" style="font-size: 2rem"></i>
+                            <i class="pi pi-user-edit" style="font-size: 2rem"></i>
+                        </div>
                     </div>
                 </div>
             </div>
