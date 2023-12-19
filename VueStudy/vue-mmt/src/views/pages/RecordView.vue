@@ -19,6 +19,7 @@ onMounted(async () => {
 
 // 학습지 미리보기
 const testDetail = ref([]);
+const testAnswers = ref([]);
 watch(listboxTest, async (newValue) => {
     try {
         const endpoint = `/tests/${newValue.testId}`;
@@ -26,12 +27,13 @@ watch(listboxTest, async (newValue) => {
         testDetail.value = response.map(item => {
             return { ...item, "answerCode": true };
         });
+        // testAnswers 채우기
+    // 답안 목록 나열 testItemNumber에 따른 itemAnswer 각 숫자에 맞춰서 html 엔터티로 바꾸기 '&#8545' ~ '&#8549'
     } catch (err) {
         console.error('데이터 생성 중 에러 발생:', err);
     }    
 });
 const toggleValue = ref(false);
-
 </script>
 
 <template>
@@ -51,16 +53,36 @@ const toggleValue = ref(false);
                     <Column field="answerCode" header="정오답입력" style="min-width: 5em">
                         <template #body="rowData">
                             <ToggleButton v-model="rowData.data.answerCode" onLabel="o" offLabel="x" :style="{ width: '3.3em' }" />
+                            <!-- <ToggleButton v-model="rowData.data.answerCode" :style="{ width: '3.3em' }">
+                                <template #onLabel>
+                                    <i class="pi pi-check-circle" style="opacity: 0; position: absolute;"></i>
+                                </template>
+                                <template #offLabel>
+                                    <i class="pi pi-minus-circle" style="opacity: 0; position: absolute;"></i>
+                                </template>      
+                            </ToggleButton> -->
                         </template>
                     </Column>
                 </DataTable>
             </div>
         </div>
         <div class="col-12 xl:col-6">
-            <div class="card"> 
+            <div class="card">
                 <h5> 학습지 미리보기 </h5>
-                {{ testDetail }}
-                진단에서 만든 뒤 그대로 가져다 쓰기
+                <!--스크롤 기능 추가하기-->
+                <div class="grid">
+                    <!-- card는 영역을 보기 위해 임시적으로 사용-->
+                    <div class="card col-12" style="height: calc(20vw);"> 유저 이름, 학습지 이름, 현재 날짜, (이거는 학원 학습지 틀 참조하기 - 촬영!)</div>
+                    <div v-for="(item, index) in testDetail" :key="index" class="card col-6">
+                        {{ item }}
+                    </div>
+                    <div v-for="i in 6 - (testDetail.length%6)" :key="'empty_' + i " class="card col-6">
+                        같은 사이즈의 빈 이미지 넣기
+                    </div>
+                    <div>
+                        &#x2461; &#x2462;
+                    </div>
+                </div>
             </div>
         </div>
     </div>
