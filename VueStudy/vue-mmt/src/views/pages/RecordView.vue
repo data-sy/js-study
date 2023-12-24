@@ -25,7 +25,8 @@ watch(listboxTest, async (newValue) => {
         const endpoint = `/tests/${newValue.testId}`;
         const response = await api.get(endpoint);
         testDetail.value = response.map(item => {
-            return { ...item, "answerCode": true };
+            return { ...item, 
+                "answerCode": true };
         });
         // testAnswers 채우기
     // 답안 목록 나열 testItemNumber에 따른 itemAnswer 각 숫자에 맞춰서 html 엔터티로 바꾸기 '&#8545' ~ '&#8549'
@@ -33,7 +34,23 @@ watch(listboxTest, async (newValue) => {
         console.error('데이터 생성 중 에러 발생:', err);
     }    
 });
+// 답안 원문자 표현
+const renderItemAnswer = (text) => {
+    return text;
+};
+// public에 담아뒀을 때
+// const imageUrlPub = 'demo/images/491001.jpg';
+// // src/assets에 담아뒀을 때 (폴더 전체) - 어차피 낱개로 접근해야 해서 사용x
+// const modules = import.meta.glob("@/assets/images/items/diag/491/*.jpg", { eager: true });
+// const images = [];
+// for (const img in modules) {
+//   images.push(modules[img].default);
+//   console.log(images);
+// }
+
+
 const toggleValue = ref(false);
+
 </script>
 
 <template>
@@ -49,7 +66,11 @@ const toggleValue = ref(false);
                 <h5>정오답 기록하기</h5>
                 <DataTable :value="testDetail" rowGroupMode="subheader" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1">
                     <Column field="testItemNumber" header="번호" style="min-width: 5em"></Column>                    
-                    <Column field="itemAnswer" header="정답" style="min-width: 5em"></Column>
+                    <Column field="itemAnswer" header="정답" style="min-width: 5em">
+                        <template #body="rowData">
+                            <span v-html="renderItemAnswer(rowData.data.itemAnswer)"></span>
+                        </template>
+                    </Column>
                     <Column field="answerCode" header="정오답입력" style="min-width: 5em">
                         <template #body="rowData">
                             <ToggleButton v-model="rowData.data.answerCode" onLabel="o" offLabel="x" :style="{ width: '3.3em' }" />
@@ -70,15 +91,19 @@ const toggleValue = ref(false);
             <div class="card">
                 <h5> 학습지 미리보기 </h5>
                 <!--스크롤 기능 추가하기-->
-                <div class="grid">
+                <div class="grid" >
                     <!-- card는 영역을 보기 위해 임시적으로 사용-->
                     <div class="card col-12" style="height: calc(20vw);"> 유저 이름, 학습지 이름, 현재 날짜, (이거는 학원 학습지 틀 참조하기 - 촬영!)</div>
                     <div v-for="(item, index) in testDetail" :key="index" class="card col-6">
-                        {{ item }}
+                        <img :src="item.itemImagePath" alt="Item Image"/>
                     </div>
-                    <div v-for="i in 6 - (testDetail.length%6)" :key="'empty_' + i " class="card col-6">
+                    <div v-for="i in (6-(testDetail.length%6))%6 " :key="'empty_' + i " class="card col-6">
                         같은 사이즈의 빈 이미지 넣기
                     </div>
+                    <!-- <div>
+                        src/assets에 담아뒀을 때 목록 내 모든 이미지 보기 테스트
+                        <img :src="img" v-for="img of images" :key="img" class="card col-6"/>
+                    </div> -->
                     <div>
                         &#x2461; &#x2462;
                     </div>

@@ -134,7 +134,7 @@ const yesClick = () => {
                 페이지 넘겨서 답안 목록
                 <h5>Image</h5>
                 <div class="flex justify-content-center">
-                    <Image :src="'demo/images/galleria/galleria11.jpg'" ref="image" alt="Image" width="250" preview />
+                    <Image :src="'demo/images/491/491001.jpg'" ref="image" alt="Image" width="250" preview />
                 </div>
             </div>
         </div>
