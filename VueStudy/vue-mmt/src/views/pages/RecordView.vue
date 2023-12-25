@@ -5,6 +5,7 @@ import { useApi } from '../../composables/api.js';
 const api = useApi();
 const listboxTest = ref(null);
 const listboxTests = ref([]);
+
 // 학습지 목록
 onMounted(async () => {
   try {
@@ -69,27 +70,33 @@ const toggleValue = ref(false);
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card">
                 <h5>정오답 기록하기</h5>
-                <DataTable :value="testDetail" rowGroupMode="subheader" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1">
-                    <Column field="testItemNumber" header="번호" style="min-width: 5em"></Column>                    
-                    <Column field="itemAnswer" header="정답" style="min-width: 5em">
-                        <template #body="rowData">
-                            <span v-html="renderItemAnswer(rowData.data.itemAnswer)"></span>
-                        </template>
-                    </Column>
-                    <Column field="answerCode" header="정오답입력" style="min-width: 5em">
-                        <template #body="rowData">
-                            <ToggleButton v-model="rowData.data.answerCode" onLabel="o" offLabel="x" :style="{ width: '3.3em' }" />
-                            <!-- <ToggleButton v-model="rowData.data.answerCode" :style="{ width: '3.3em' }">
-                                <template #onLabel>
-                                    <i class="pi pi-check-circle" style="opacity: 0; position: absolute;"></i>
-                                </template>
-                                <template #offLabel>
-                                    <i class="pi pi-minus-circle" style="opacity: 0; position: absolute;"></i>
-                                </template>      
-                            </ToggleButton> -->
-                        </template>
-                    </Column>
-                </DataTable>
+                <div v-if="!listboxTest" > </div>
+                <div v-else-if="listboxTest.record">
+                    트루이면 안내문구와 함께 분석결과보기 링크
+                </div>
+                <div v-else > 
+                    <DataTable :value="testDetail" rowGroupMode="subheader" groupRowsBy="representative.name" sortMode="single" sortField="representative.name" :sortOrder="1">
+                        <Column field="testItemNumber" header="번호" style="min-width: 5em"></Column>                    
+                        <Column field="itemAnswer" header="정답" style="min-width: 5em">
+                            <template #body="rowData">
+                                <span v-html="renderItemAnswer(rowData.data.itemAnswer)"></span>
+                            </template>
+                        </Column>
+                        <Column field="answerCode" header="정오답입력" style="min-width: 5em">
+                            <template #body="rowData">
+                                <ToggleButton v-model="rowData.data.answerCode" onLabel="o" offLabel="x" :style="{ width: '3.3em' }" />
+                                <!-- <ToggleButton v-model="rowData.data.answerCode" :style="{ width: '3.3em' }">
+                                    <template #onLabel>
+                                        <i class="pi pi-check-circle" style="opacity: 0; position: absolute;"></i>
+                                    </template>
+                                    <template #offLabel>
+                                        <i class="pi pi-minus-circle" style="opacity: 0; position: absolute;"></i>
+                                    </template>      
+                                </ToggleButton> -->
+                            </template>
+                        </Column>
+                    </DataTable>
+                </div>
             </div>
         </div>
         <div class="col-12 xl:col-6">
