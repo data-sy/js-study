@@ -20,14 +20,22 @@ onMounted(async () => {
 // 학습지 미리보기
 const testDetail = ref([]);
 const testAnswers = ref([]);
+// const testId = ref(0);
 watch(listboxTest, async (newValue) => {
     try {
+        // testId.value = newValue.testId;
         const endpoint = `/tests/${newValue.testId}`;
         const response = await api.get(endpoint);
         testDetail.value = response.map(item => {
             return { ...item, 
                 "answerCode": true };
         });
+        // const modules = await import.meta.glob(`@/assets/images/items/diag/${testId.value}/*.jpg`);
+        // const images = [];
+        // for (const img in modules) {
+        //     images.push(modules[img].default);
+        // }
+        // console.log(images);
         // testAnswers 채우기
     // 답안 목록 나열 testItemNumber에 따른 itemAnswer 각 숫자에 맞춰서 html 엔터티로 바꾸기 '&#8545' ~ '&#8549'
     } catch (err) {
@@ -40,15 +48,15 @@ const renderItemAnswer = (text) => {
 };
 // public에 담아뒀을 때
 // const imageUrlPub = 'demo/images/491001.jpg';
-// // src/assets에 담아뒀을 때 (폴더 전체) - 어차피 낱개로 접근해야 해서 사용x
-// const modules = import.meta.glob("@/assets/images/items/diag/491/*.jpg", { eager: true });
-// const images = [];
-// for (const img in modules) {
-//   images.push(modules[img].default);
-//   console.log(images);
+// 진단학습지 번호 추출
+// function extractNumberFromImagePath(itemImagePath) {
+//   const match = itemImagePath.match(/diag\/(\d+)/);
+//   if (match) {
+//     return match[1]; // 'diag/' 뒤의 숫자 반환
+//   } else {
+//     return null; // 숫자를 찾을 수 없을 때 null 반환
+//   }
 // }
-
-
 const toggleValue = ref(false);
 
 </script>
@@ -93,9 +101,10 @@ const toggleValue = ref(false);
                 <!--스크롤 기능 추가하기-->
                 <div class="grid" >
                     <!-- card는 영역을 보기 위해 임시적으로 사용-->
-                    <div class="card col-12" style="height: calc(20vw);"> 유저 이름, 학습지 이름, 현재 날짜, (이거는 학원 학습지 틀 참조하기 - 촬영!)</div>
+                    <div class="card col-12" style="height: calc(8vw);"> 유저 이름, 학습지 이름, 현재 날짜, (이거는 학원 학습지 틀 참조하기 - 촬영!)</div>
                     <div v-for="(item, index) in testDetail" :key="index" class="card col-6">
-                        <img :src="item.itemImagePath" alt="Item Image"/>
+                        <img :src="item.itemImagePath" alt="Item Image"  class="fit-image"/>
+                        <div v-if="index > 5" style="height: calc(4vw);"> 크기 맞추기 위해 여백 만들기 </div>
                     </div>
                     <div v-for="i in (6-(testDetail.length%6))%6 " :key="'empty_' + i " class="card col-6">
                         같은 사이즈의 빈 이미지 넣기
@@ -104,11 +113,23 @@ const toggleValue = ref(false);
                         src/assets에 담아뒀을 때 목록 내 모든 이미지 보기 테스트
                         <img :src="img" v-for="img of images" :key="img" class="card col-6"/>
                     </div> -->
-                    <div>
-                        &#x2461; &#x2462;
+                    <div>정답도 맘에 드는 템플릿 가져와서 사용하기</div>
+                    <div v-for="(item, index) in testDetail" :key="index" class="col-12">
+                        <!-- index+1 표시 -->
+                        <span>{{ index + 1 }}. </span>                        
+                        <!-- itemAnswer 표시 -->
+                        <span v-html="renderItemAnswer(item.itemAnswer)"></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<style>
+.fit-image {
+    max-width: 100%; /* 최대 너비를 부모 요소인 div의 크기에 맞게 조정합니다. */
+    height: auto; /* 이미지의 가로세로 비율을 유지하면서 조정합니다. */
+    display: block; /* 인라인 요소와의 공간을 없애기 위해 블록 요소로 변경합니다. */
+}
+</style>
