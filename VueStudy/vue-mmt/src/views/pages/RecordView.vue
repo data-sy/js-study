@@ -106,7 +106,7 @@ const toggleValue = ref(false);
                         <img :src="item.itemImagePath" alt="Item Image"  class="fit-image"/>
                         <div v-if="index > 5" style="height: calc(4vw);"> 크기 맞추기 위해 여백 만들기 </div>
                     </div>
-                    <div v-for="i in (6-(testDetail.length%6))%6 " :key="'empty_' + i " class="card col-6">
+                    <div v-for="i in (6-(testDetail.length%6))%6 " :key="'empty_' + i " style="height: calc(23vw);" class="card col-6">
                         같은 사이즈의 빈 이미지 넣기
                     </div>
                     <!-- <div>
