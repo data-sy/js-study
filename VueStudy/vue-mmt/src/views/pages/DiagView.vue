@@ -58,6 +58,10 @@ watch(listboxTest, async (newValue) => {
         console.error('데이터 생성 중 에러 발생:', err);
     }    
 });
+// 답안 원문자 표현
+const renderItemAnswer = (text) => {
+    return text;
+};
 
 // '이전' 버튼 (홈으로)
 const router = useRouter()
@@ -126,15 +130,28 @@ const yesClick = () => {
         <div class="col-12 xl:col-6">
             <div class="card"> 
                 <h5> 학습지 미리보기 </h5>
-                {{ testDetail }}
-                해당 카드의 절반 사이즈의 div 만들고
-                A4비율에 맞춰서 문항 6개 표현하기
-                여기는 이미지 가져와서 가로 두 칸에 나눠 넣기
-                순서는 item_number 대로
-                페이지 넘겨서 답안 목록
-                <h5>Image</h5>
-                <div class="flex justify-content-center">
-                    <Image :src="'demo/images/491/491001.jpg'" ref="image" alt="Image" width="250" preview />
+                <!--스크롤 기능 추가하기-->
+                <div class="grid" >
+                    <!-- card는 영역을 보기 위해 임시적으로 사용-->
+                    <div class="card col-12" style="height: calc(8vw);"> 유저 이름, 학습지 이름, 현재 날짜, (이거는 학원 학습지 틀 참조하기 - 촬영!)</div>
+                    <div v-for="(item, index) in testDetail" :key="index" class="card col-6">
+                        <img :src="item.itemImagePath" alt="Item Image"  class="fit-image"/>
+                        <div v-if="index > 5" style="height: calc(4vw);"> 크기 맞추기 위해 여백 만들기 </div>
+                    </div>
+                    <div v-for="i in (6-(testDetail.length%6))%6 " :key="'empty_' + i " style="height: calc(23vw);" class="card col-6">
+                        같은 사이즈의 빈 이미지 넣기
+                    </div>
+                    <!-- <div>
+                        src/assets에 담아뒀을 때 목록 내 모든 이미지 보기 테스트
+                        <img :src="img" v-for="img of images" :key="img" class="card col-6"/>
+                    </div> -->
+                    <div>정답도 맘에 드는 템플릿 가져와서 사용하기</div>
+                    <div v-for="(item, index) in testDetail" :key="index" class="col-12">
+                        <!-- index+1 표시 -->
+                        <span>{{ index + 1 }}. </span>                        
+                        <!-- itemAnswer 표시 -->
+                        <span v-html="renderItemAnswer(item.itemAnswer)"></span>
+                    </div>
                 </div>
             </div>
         </div>

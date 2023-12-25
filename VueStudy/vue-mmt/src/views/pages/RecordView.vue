@@ -19,7 +19,6 @@ onMounted(async () => {
 
 // 학습지 미리보기
 const testDetail = ref([]);
-const testAnswers = ref([]);
 // const testId = ref(0);
 watch(listboxTest, async (newValue) => {
     try {
@@ -36,8 +35,6 @@ watch(listboxTest, async (newValue) => {
         //     images.push(modules[img].default);
         // }
         // console.log(images);
-        // testAnswers 채우기
-    // 답안 목록 나열 testItemNumber에 따른 itemAnswer 각 숫자에 맞춰서 html 엔터티로 바꾸기 '&#8545' ~ '&#8549'
     } catch (err) {
         console.error('데이터 생성 중 에러 발생:', err);
     }    
