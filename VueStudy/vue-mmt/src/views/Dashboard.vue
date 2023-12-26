@@ -27,7 +27,7 @@ const closeConfirmation = () => {
                         </div>
                         <div>
                             <i class="pi pi-question-circle"></i>
-                            <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+                            <!-- <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i> -->
                             <i class="pi pi-user" style="font-size: 2rem"></i>
                             <i class="pi pi-user-edit" style="font-size: 2rem"></i>
                         </div>
