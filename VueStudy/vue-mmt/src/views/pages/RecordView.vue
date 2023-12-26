@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
-import { useApi } from '../../composables/api.js';
+import { useApi } from '@/composables/api.js';
 
 const api = useApi();
 const listboxTest = ref(null);

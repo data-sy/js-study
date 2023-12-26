@@ -63,6 +63,11 @@ const onUserClick = () =>{
     // router.push('/login');
 };
 const checked = ref(false);
+const goToSignup = () => {
+  // 회원가입 페이지로 이동하는 로직 작성
+  loginDialog.value = false;
+  router.push({ name: 'signup' }); 
+};
 
 const onSettingsClick = () => {
     topbarMenuActive.value = false;
@@ -151,6 +156,10 @@ const isOutsideClicked = (event) => {
                             <Button type="submit" label="Sign In" class="w-full p-3 text-xl"></Button>
                         </div>
                     </form>
+                    <div class="mt-3 flex justify-center">
+                        <a @click="goToSignup()" class="text-600 font-medium cursor-pointer"> 회원가입 </a>
+                        <a class="text-600 font-medium cursor-pointer"> 아이디 비밀번호 찾기 </a>
+                    </div>
                     <div>{{ data }}</div>
                     <div v-if="error" style="color: red">{{ error.message }}</div>
                     <div><a href="/oauth2/authorization/google">Google Login</a></div>

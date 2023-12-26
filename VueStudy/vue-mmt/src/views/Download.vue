@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref, watch, nextTick  } from 'vue';
 import { useRouter } from 'vue-router'
-import { useApi } from '../composables/api.js';
+import { useApi } from '@/composables/api.js';
 import { useHtmlToPdf } from '@/composables/htmlToPdf';
 
 const api = useApi();

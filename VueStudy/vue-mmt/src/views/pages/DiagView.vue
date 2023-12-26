@@ -3,7 +3,7 @@
 
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
-import { useApi } from '../../composables/api.js';
+import { useApi } from '@/composables/api.js';
 import levelDic from '@/assets/data/level.json';
 
 const api = useApi();

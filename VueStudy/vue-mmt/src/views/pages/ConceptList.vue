@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router'
-import { useApi } from '../../composables/api.js';
+import { useApi } from '@/composables/api.js';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
 import levelDic from '@/assets/data/level.json';
