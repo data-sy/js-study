@@ -2,14 +2,15 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
 import { useRouter } from 'vue-router';
+import { useApi } from '../composables/api.js';
 
+const api = useApi();
 const { layoutConfig, onMenuToggle } = useLayout();
 
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
 const router = useRouter();
-const productDialog = ref(false);
-const product = ref({});
+const loginDialog = ref(false);
 const submitted = ref(false);
 
 onMounted(() => {
@@ -28,39 +29,40 @@ const logoUrl = computed(() => {
 const onTopBarMenuButton = () => {
     topbarMenuActive.value = !topbarMenuActive.value;
 };
-
+// data는 로그인 잘되는지 토큰 보는 거였으니 나중에 삭제
+const data = ref(null);
+const email = ref('');
+const password = ref('');
+const error = ref(null);
+const requestData = ref({
+    userEmail: email,
+    userPassword: password,
+});
+const closeDialog = () => {
+  loginDialog.value = false;
+};
+const login = async () => {
+  try {
+    const response = await api.post('/authentication', requestData.value);
+    data.value = response;
+    error.value = null;
+    closeDialog();
+    router.push({ name: 'dashboard' }); 
+  } catch (err) {
+    console.error('데이터 생성 중 에러 발생:', err);
+    error.value = err;
+  }
+};
 const onUserClick = () =>{
     // 로그인 되어 있다면 유저 페이지로 router.push
     // 로그인 되어 있지 않다면 다이얼로그로 로그인 창 띄우기
     onTopBarMenuButton();
-    product.value = {};
     submitted.value = false;
-    productDialog.value = true;
+    loginDialog.value = true;
+    // // 다이얼로그 말고 페이지 사용 시
+    // router.push('/login');
 };
-const hideDialog = () => {
-    productDialog.value = false;
-    submitted.value = false;
-};
-
-const saveProduct = () => {
-    submitted.value = true;
-    if (product.value.name && product.value.name.trim() && product.value.price) {
-        if (product.value.id) {
-            product.value.inventoryStatus = product.value.inventoryStatus.value ? product.value.inventoryStatus.value : product.value.inventoryStatus;
-            products.value[findIndexById(product.value.id)] = product.value;
-            toast.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-        } else {
-            product.value.id = createId();
-            product.value.code = createId();
-            product.value.image = 'product-placeholder.svg';
-            product.value.inventoryStatus = product.value.inventoryStatus ? product.value.inventoryStatus.value : 'INSTOCK';
-            products.value.push(product.value);
-            toast.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
-        }
-        productDialog.value = false;
-        product.value = {};
-    }
-};
+const checked = ref(false);
 
 const onSettingsClick = () => {
     topbarMenuActive.value = false;
@@ -128,13 +130,12 @@ const isOutsideClicked = (event) => {
             </button>
         </div>
 
-        <Dialog v-model:visible="productDialog" :style="{ width: '500px' }" :modal="true" @hide="clearPassword" class="p-fluid">
+        <Dialog v-model:visible="loginDialog" :style="{ width: '500px' }" :modal="true" @hide="clearPassword" class="p-fluid">
             <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card py-6 px-6 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5">
                         <img :src="logoUrl" alt="logo" class="mb-1 w-3rem flex-shrink-0" />
                         <div class="text-900 text-3xl font-medium mb-3">Welcome, MMT!</div>
-                        <span class="text-600 font-medium">Sign in to continue</span>
                     </div>
                     <form v-on:submit.prevent="login">
                         <div>
@@ -152,15 +153,11 @@ const isOutsideClicked = (event) => {
                     </form>
                     <div>{{ data }}</div>
                     <div v-if="error" style="color: red">{{ error.message }}</div>
-                    <div> 구글 로그인 </div>
-                    <div> 네이버 로그인 </div>
-                    <div> 카카오 로그인 </div>
+                    <div><a href="/oauth2/authorization/google">Google Login</a></div>
+                    <div><a href="/oauth2/authorization/naver">Naver Login</a></div>
+                    <div><a href="/oauth2/authorization/kakao">Kakao Login</a><br></div>
                 </div>
             </div>
-            <!-- <template #footer>
-                <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="hideDialog" />
-                <Button label="Save" icon="pi pi-check" class="p-button-text" @click="saveProduct" />
-            </template> -->
         </Dialog>
     </div>
 </template>
