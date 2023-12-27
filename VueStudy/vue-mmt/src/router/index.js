@@ -9,6 +9,11 @@ const router = createRouter({
             component: AppLayout,
             children: [
                 {
+                    path: '/cyto',
+                    name: 'cyto',
+                    component: () => import('@/views/CytoView.vue')
+                },
+                {
                     path: '/login',
                     name: 'login2',
                     component: () => import('@/views/pages/LoginView.vue')

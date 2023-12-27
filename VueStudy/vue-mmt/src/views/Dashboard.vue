@@ -72,6 +72,7 @@ const closeConfirmation = () => {
         </div>
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card">
+                <router-link to="/cyto"> cytoscape 페이지로 이동 </router-link>
             </div>
         </div>
         
