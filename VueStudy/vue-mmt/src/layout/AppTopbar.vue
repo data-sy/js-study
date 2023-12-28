@@ -38,6 +38,9 @@ const requestData = ref({
     userEmail: email,
     userPassword: password,
 });
+// const clearPassword = () => {
+//     const password = ref('');
+// };
 const closeDialog = () => {
   loginDialog.value = false;
 };
@@ -135,7 +138,7 @@ const isOutsideClicked = (event) => {
             </button>
         </div>
 
-        <Dialog v-model:visible="loginDialog" :style="{ width: '500px' }" :modal="true" @hide="clearPassword" class="p-fluid">
+        <Dialog v-model:visible="loginDialog" :style="{ width: '500px' }" :modal="true" class="p-fluid">
             <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card py-6 px-6 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5">

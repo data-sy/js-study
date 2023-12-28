@@ -7,55 +7,107 @@ const router = useRouter()
 const receivedData = ref('')
 const dataToSend = history.state.dataToSend;
 
-onMounted(() => {
-  if (dataToSend) {
-    console.log(dataToSend);
-    receivedData.value = dataToSend
-    // console.log("receivedData", receivedData);
-  }
-})
+// onMounted(() => {
+//   if (dataToSend) {
+//     console.log(dataToSend);
+//     receivedData.value = dataToSend
+//     // console.log("receivedData", receivedData);
+//   }
+// })
 
 receivedData.value = { 
-    "conceptId": 2625, 
-    "nodes": [
-         { "conceptId": 2620, "conceptName": "약수", "conceptDescription": "약수: 어떤 수를 나누어 떨어지게 하는 수", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초5", "conceptSemester": "1학기", "conceptChapterId": 299, "conceptChapterName": "약수와 배수를 찾아볼까요", "conceptChapterMain": null, "conceptChapterSub": "약수와 배수", "conceptAchievementId": 22, "conceptAchievementName": "약수의 의미를 알고 구할 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 1875, "conceptName": "자연수", "conceptDescription": "1, 2, 3과 같은 수", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초3", "conceptSemester": "2학기", "conceptChapterId": 206, "conceptChapterName": "여러 가지 분수를 알아볼까요 (1)", "conceptChapterMain": null, "conceptChapterSub": "분수", "conceptAchievementId": 15, "conceptAchievementName": "단위분수와 진분수의 의미를 알고 그 관계를 설명할 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 5814, "conceptName": "1부터 5까지의 수", "conceptDescription": "1부터 5까지의 수를 읽고 셀 수 있다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 1, "conceptChapterName": "몇일까요 (1)", "conceptChapterMain": null, "conceptChapterSub": "9까지의 수", "conceptAchievementId": 1, "conceptAchievementName": "50까지의수 개념을이해 하고, 수를 세고 읽고 쓸 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 5834, "conceptName": "수의 순서", "conceptDescription": "1부터 9까지의 수 1, 2, 3, 4, 5, 6, 7, 8, 9를 순서대로 나타낼 수 있다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 6, "conceptChapterName": "수의 순서를 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "9까지의 수", "conceptAchievementId": 1, "conceptAchievementName": "50까지의 수 개념을 이해 하고, 수를 세고 읽고 쓸 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 7581, "conceptName": "첫째", "conceptDescription": "차례를 매길 때, 맨 처음에 오는 수", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 5, "conceptChapterName": "몇째일까요", "conceptChapterMain": null, "conceptChapterSub": "9까지의 수", "conceptAchievementId": 5, "conceptAchievementName": "50까지의 수의 계열을 이해하고, 수의 크기를 비교할 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 5485, "conceptName": "여섯", "conceptDescription": "다섯에 하나를 더한 수", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 3, "conceptChapterName": "몇일까요 (2)", "conceptChapterMain": null, "conceptChapterSub": "9까지의 수", "conceptAchievementId": 1, "conceptAchievementName": "50까지의수 개념을이해 하고, 수를 세고 읽고 쓸 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 5814, "conceptName": "1부터 5까지의 수", "conceptDescription": "1부터 5까지의 수를 읽고 셀 수 있다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 1, "conceptChapterName": "몇일까요 (1)", "conceptChapterMain": null, "conceptChapterSub": "9까지의 수", "conceptAchievementId": 1, "conceptAchievementName": "50까지의수 개념을이해 하고, 수를 세고 읽고 쓸 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 5835, "conceptName": "1 큰 수와 1 작은 수", "conceptDescription": "수를 순서대로 썼을 때 바로 앞의 수가 1 작은 수, 바로 뒤의 수가 1 큰 수입니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 7, "conceptChapterName": "1만큼 더 큰 수와 1만큼 더 작은 수는 무엇일까요", "conceptChapterMain": null, "conceptChapterSub": "9까지의 수", "conceptAchievementId": 1, "conceptAchievementName": "50까지의 수 개념을 이해 하고, 수를 세고 읽고 쓸 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 5836, "conceptName": "두 수의 크기 비교하기", "conceptDescription": "9와 5의 크기를 비교해보면 9는 5보다 큽니다. 5는 9보다 작습니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 8, "conceptChapterName": "어느 수가 더 클까요", "conceptChapterMain": null, "conceptChapterSub": "9까지의 수", "conceptAchievementId": 1, "conceptAchievementName": "50까지의 수 개념을 이해 하고, 수를 세고 읽고 쓸 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 5835, "conceptName": "1 큰 수와 1 작은 수", "conceptDescription": "수를 순서대로 썼을 때 바로 앞의 수가 1 작은 수, 바로 뒤의 수가 1 큰 수입니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 7, "conceptChapterName": "1만큼 더 큰 수와 1만큼 더 작은 수는 무엇일까요", "conceptChapterMain": null, "conceptChapterSub": "9까지의 수", "conceptAchievementId": 1, "conceptAchievementName": "50까지의 수 개념을 이해 하고, 수를 세고 읽고 쓸 수 있다.", "conceptSection": "['수와 연산']" }, 
-         { "conceptId": 6557, "conceptName": "10개씩 묶음의 수가 다를 때", "conceptDescription": "10개씩 묶음의 수를 비교합니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "1학기", "conceptChapterId": 32, "conceptChapterName": "어느 수가 더 클까요", "conceptChapterMain": null, "conceptChapterSub": "50까지의 수", "conceptAchievementId": 5, "conceptAchievementName": "50까지의 수의 계열을 이해하고, 수의 크기를 비교할 수 있다.", "conceptSection": "['수와 연산']" } 
-        ], 
-    "edges": [ 
-        { "data": { "id": 781, "toConceptId": 5834, "fromConceptId": 1875 } }, 
-        { "data": { "id": 3421, "toConceptId": 5814, "fromConceptId": 1875 } }, 
-        { "data": { "id": 64, "toConceptId": 1875, "fromConceptId": 2620 } }, 
-        { "data": { "id": 83, "toConceptId": 2620, "fromConceptId": 2625 } }, 
-        { "data": { "id": 2352, "toConceptId": 7581, "fromConceptId": 5834 } }, 
-        { "data": { "id": 2353, "toConceptId": 5835, "fromConceptId": 5834 } }, 
-        { "data": { "id": 2354, "toConceptId": 5836, "fromConceptId": 5835 } }, 
-        { "data": { "id": 2357, "toConceptId": 5835, "fromConceptId": 5836 } }, 
-        { "data": { "id": 2358, "toConceptId": 6557, "fromConceptId": 5836 } }, 
-        { "data": { "id": 2350, "toConceptId": 5814, "fromConceptId": 7581 } }, 
-        { "data": { "id": 2351, "toConceptId": 5485, "fromConceptId": 7581 } } 
-    ] 
+  "conceptId": 2119,
+  "nodes": [
+  {
+        "conceptId": 2119,
+        "conceptName": "사다리꼴",
+        "conceptDescription": "사다리꼴: 평행한 변이 한 쌍이라도 있는 사각형",
+        "conceptSchoolLevel": "초등",
+        "conceptGradeLevel": "초4",
+        "conceptSemester": "2학기",
+        "conceptChapterId": 280,
+        "conceptChapterName": "사다리꼴을 알아볼까요",
+        "conceptChapterMain": null,
+        "conceptChapterSub": "사각형",
+        "conceptAchievementId": 158,
+        "conceptAchievementName": "여러 가지 모양의 사각형에 대한 분류 활동을 통하여 사다리꼴, 평행사변형, 마름모를 알고, 그 성질을 이해한다.",
+        "conceptSection": "['도형, 기하']"
+    },
+      { "conceptId": 342, "conceptName": "직사각형", "conceptDescription": "네 각이 모두 직각인 사각형을 직사각형이라고 합니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초3", "conceptSemester": "1학기", "conceptChapterId": 156, "conceptChapterName": "직사각형을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "평면도형", "conceptAchievementId": 149, "conceptAchievementName": "각과 직각의 의미를 이해하고, 생활 주변에서 예를 찾을 수 있다.", "conceptSection": "['도형, 기하']" }, 
+      { "conceptId": 6804, "conceptName": "네모 모양 알아 보기", "conceptDescription": "네모모양은 뾰족한 곳이 4군데 편평한 곳이 4군데입니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "2학기", "conceptChapterId": 47, "conceptChapterName": "여러 가지 모양을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "여러 가지 모양", "conceptAchievementId": 145, "conceptAchievementName": "교실 및 생활 주변에서 여러 가지 물건을 관찰하여 삼각형, 사각형, 원의 모양을 찾고, 그것들을 이용하여 여러 가지 모양을 꾸밀 수 있다.", "conceptSection": "['도형, 기하']" }, 
+      { "conceptId": 332, "conceptName": "각", "conceptDescription": "한 점에서 그은 두 반직선으로 이루어진 도형을 '각'이라고 합니다. 반직선 ㄴㄱ과 반직선 ㄴㄷ으로 이루어진 각을 '각 ㄱㄴㄷ' 또는 '각 ㄷㄴㄱ'이라고 하고, 이때 점 ㄴ을 각의 꼭짓점이라 합니다. 반직선 ㄴㄱ과 반직선 ㄴㄷ을 각의 '변'이라고 하고, 이 변을 '변 ㄴㄱ'과 '변 ㄴㄷ'이라고 합니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초3", "conceptSemester": "1학기", "conceptChapterId": 153, "conceptChapterName": "각을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "평면도형", "conceptAchievementId": 149, "conceptAchievementName": "각과 직각의 의미를 이해하고, 생활 주변에서 예를 찾을 수 있다.", "conceptSection": "['도형, 기하']" }, 
+      { "conceptId": 346, "conceptName": "정사각형", "conceptDescription": "네 각이 모두 직각이고 네 변의 길이가 모두 같은 사각형을 '정사각형'이라고 합니다.\\n(참고) 정사각형은 네 각이 모두 직각이므로 직사각형이라고 할 수 있습니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초3", "conceptSemester": "1학기", "conceptChapterId": 157, "conceptChapterName": "정사각형을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "평면도형", "conceptAchievementId": 149, "conceptAchievementName": "각과 직각의 의미를 이해하고, 생활 주변에서 예를 찾을 수 있다.", "conceptSection": "['도형, 기하']" }, 
+      { "conceptId": 6804, "conceptName": "네모 모양 알아 보기", "conceptDescription": "네모모양은 뾰족한 곳이 4군데 편평한 곳이 4군데입니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "2학기", "conceptChapterId": 47, "conceptChapterName": "여러 가지 모양을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "여러 가지 모양", "conceptAchievementId": 145, "conceptAchievementName": "교실 및 생활 주변에서 여러 가지 물건을 관찰하여 삼각형, 사각형, 원의 모양을 찾고, 그것들을 이용하여 여러 가지 모양을 꾸밀 수 있다.", "conceptSection": "['도형, 기하']" }, 
+      { "conceptId": 332, "conceptName": "각", "conceptDescription": "한 점에서 그은 두 반직선으로 이루어진 도형을 '각'이라고 합니다. 반직선 ㄴㄱ과 반직선 ㄴㄷ으로 이루어진 각을 '각 ㄱㄴㄷ' 또는 '각 ㄷㄴㄱ'이라고 하고, 이때 점 ㄴ을 각의 꼭짓점이라 합니다. 반직선 ㄴㄱ과 반직선 ㄴㄷ을 각의 '변'이라고 하고, 이 변을 '변 ㄴㄱ'과 '변 ㄴㄷ'이라고 합니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초3", "conceptSemester": "1학기", "conceptChapterId": 153, "conceptChapterName": "각을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "평면도형", "conceptAchievementId": 149, "conceptAchievementName": "각과 직각의 의미를 이해하고, 생활 주변에서 예를 찾을 수 있다.", "conceptSection": "['도형, 기하']" }, 
+      { "conceptId": 342, "conceptName": "직사각형", "conceptDescription": "네 각이 모두 직각인 사각형을 직사각형이라고 합니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초3", "conceptSemester": "1학기", "conceptChapterId": 156, "conceptChapterName": "직사각형을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "평면도형", "conceptAchievementId": 149, "conceptAchievementName": "각과 직각의 의미를 이해하고, 생활 주변에서 예를 찾을 수 있다.", "conceptSection": "['도형, 기하']" }, 
+      { "conceptId": 6804, "conceptName": "네모 모양 알아 보기", "conceptDescription": "네모모양은 뾰족한 곳이 4군데 편평한 곳이 4군데입니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초1", "conceptSemester": "2학기", "conceptChapterId": 47, "conceptChapterName": "여러 가지 모양을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "여러 가지 모양", "conceptAchievementId": 145, "conceptAchievementName": "교실 및 생활 주변에서 여러 가지 물건을 관찰하여 삼각형, 사각형, 원의 모양을 찾고, 그것들을 이용하여 여러 가지 모양을 꾸밀 수 있다.", "conceptSection": "['도형, 기하']" }, 
+      { "conceptId": 332, "conceptName": "각", "conceptDescription": "한 점에서 그은 두 반직선으로 이루어진 도형을 '각'이라고 합니다. 반직선 ㄴㄱ과 반직선 ㄴㄷ으로 이루어진 각을 '각 ㄱㄴㄷ' 또는 '각 ㄷㄴㄱ'이라고 하고, 이때 점 ㄴ을 각의 꼭짓점이라 합니다. 반직선 ㄴㄱ과 반직선 ㄴㄷ을 각의 '변'이라고 하고, 이 변을 '변 ㄴㄱ'과 '변 ㄴㄷ'이라고 합니다.", "conceptSchoolLevel": "초등", "conceptGradeLevel": "초3", "conceptSemester": "1학기", "conceptChapterId": 153, "conceptChapterName": "각을 알아볼까요", "conceptChapterMain": null, "conceptChapterSub": "평면도형", "conceptAchievementId": 149, "conceptAchievementName": "각과 직각의 의미를 이해하고, 생활 주변에서 예를 찾을 수 있다.", "conceptSection": "['도형, 기하']" } 
+    ], 
+  "edges": [ 
+    { "data": { "id": "153", "source": "6804", "target": "342" } }, 
+    { "data": { "id": "2272", "source": "332", "target": "342" } }, 
+    { "data": { "id": "155", "source": "6804", "target": "346" } }, 
+    { "data": { "id": "2273", "source": "332", "target": "346" } }, 
+    { "data": { "id": "2274", "source": "342", "target": "346" } }, 
+    { "data": { "id": "918", "source": "342", "target": "2119" } }, 
+    { "data": { "id": "919", "source": "346", "target": "2119" } } 
+  ] 
 }
+
+const knowledgeSpace = [];
+// nodes를 knowledgeSpace 변환하는 반복문
+// receivedData.value.nodes.forEach(node => {
+//   knowledgeSpace.push({
+//     data: {
+//       id: node.conceptId.toString(), // conceptId를 id로 사용
+//       label: node.conceptName // conceptName을 label로 사용
+//     }
+//   });
+// });
+const uniqueConceptIds = new Set();
+receivedData.value.nodes.forEach(node => {
+  // 중복된 conceptId를 Set에 추가
+  uniqueConceptIds.add(node.conceptId);
+});
+
+// 중복이 제거된 conceptId를 가지고 knowledgeSpace에 데이터 추가
+uniqueConceptIds.forEach(uniqueConceptId => {
+  const filteredNode = receivedData.value.nodes.find(node => node.conceptId === uniqueConceptId);
+  if (filteredNode) {
+    knowledgeSpace.push({
+      data: {
+        id: filteredNode.conceptId.toString(),
+        label: filteredNode.conceptName
+      }
+    });
+  }
+});
+// edges를 knowledgeSpace 변환
+// 나중에 백단에서 걸러서 오는 걸로 리팩토링
+receivedData.value.edges.forEach(edge => {
+  // edge의 source가 nodes의 conceptId에 있는지 확인
+  const sourceExists = receivedData.value.nodes.some(node => {
+    return node.conceptId === parseInt(edge.data.source);
+  });
+  // target이 nodes 안에 있을 경우만 추가
+  if (sourceExists) {
+    knowledgeSpace.push(edge);
+  }
+});
+
 const cyElement = ref(null);
 let cy = null;
 
 onMounted(() => {
   cy = cytoscape({
     container: cyElement.value,
-    elements: [
-      // 그래프 요소들을 정의합니다.
-      { data: { id: 'node1', label: 'Node 1' }, position: { x: 100, y: 100 } },
-      { data: { id: 'node2', label: 'Node 2' }, position: { x: 200, y: 200 } },
-      { data: { id: 'edge1', source: 'node1', target: 'node2' } }
-    ],
+    elements: knowledgeSpace,
+    // elements: [
+    //   // 그래프 요소들을 정의합니다. (노드 데이터에  position: { x: 100, y: 100 })
+    //   { data: { id: 'node1', label: 'Node 1' } },
+    //   { data: { id: 'node2', label: 'Node 2' } },
+    //   { data: { id: 'edge1', source: 'node1', target: 'node2' } }
+    // ],
     style: [
       // 그래프 스타일을 정의합니다.
       {
@@ -69,6 +121,8 @@ onMounted(() => {
         selector: 'edge',
         style: {
           'width': 3,
+          // 화살표
+          'curve-style': 'bezier',
           'line-color': '#ccc',
           'target-arrow-color': '#ccc',
           'target-arrow-shape': 'triangle'
@@ -84,9 +138,6 @@ onBeforeUnmount(() => {
     cy.destroy();
   }
 });
-
-
-
 
 const goBack = () => {
   // 이전 페이지로 돌아가기

@@ -106,7 +106,7 @@ const goToNextPage = async () => {
         const data = {
             conceptId : conceptId.value,
             nodes : nodesResponse,
-            edges : edgesResponse
+            edges : edgesResponse,
         }
         router.push({
             name: 'concepttree',

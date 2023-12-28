@@ -14,6 +14,11 @@ const router = createRouter({
                     component: () => import('@/views/CytoView.vue')
                 },
                 {
+                    path: '/signup',
+                    name: 'signup',
+                    component: () => import('@/views/SignUp.vue')
+                },
+                {
                     path: '/login',
                     name: 'login2',
                     component: () => import('@/views/pages/LoginView.vue')
