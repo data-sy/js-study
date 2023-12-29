@@ -16,7 +16,6 @@ const treeValue = ref(null);
 const listboxLevel = ref(null);
 const listboxLevels = ref([]);
 watch(selectButtonLevel, (newValue, oldValue) => {
-    console.log(`selectButtonLevel이 변경되었습니다. 새 값: ${newValue}, 이전 값: ${oldValue}`);
     if (newValue.name === '초등') {
         listboxLevels.value = levelDic['초등'];
     } else if (newValue.name === '중등') {
