@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="card">
         <h3>Documentation</h3>
         <p class="bg-primary border-round p-3">This page covers the Vite version, for Nuxt 3 visit the <a href="https://github.com/primefaces/sakai-nuxt" class="font-bold bg-primary hover:underline">sakai-nuxt</a> repository instead.</p>
@@ -75,4 +75,4 @@
         }
     }
 }
-</style>
+</style> -->

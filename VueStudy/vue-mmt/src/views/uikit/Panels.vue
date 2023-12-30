@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 
 const toolbarItems = ref([
@@ -214,4 +214,4 @@ const toggle = () => {
             </div>
         </div>
     </div>
-</template>
+</template> -->

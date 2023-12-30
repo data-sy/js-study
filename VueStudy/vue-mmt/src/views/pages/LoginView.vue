@@ -1,7 +1,7 @@
 <script setup>
 import { useLayout } from '@/layout/composables/layout';
 import { ref, computed } from 'vue';
-import AppConfig from '@/layout/AppConfig.vue';
+// import AppConfig from '@/layout/AppConfig.vue';
 import { useApi } from '@/composables/api.js';
 
 const api = useApi();
@@ -68,7 +68,7 @@ const login = async () => {
             </div>
         </div>
     </div>
-    <AppConfig simple />
+    <!-- <AppConfig simple /> -->
 </template>
 
 <style scoped>

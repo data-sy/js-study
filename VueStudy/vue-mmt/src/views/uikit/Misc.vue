@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const value = ref(0);
@@ -177,4 +177,4 @@ onBeforeUnmount(() => {
             </div>
         </div>
     </div>
-</template>
+</template> -->

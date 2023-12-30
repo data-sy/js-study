@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, onMounted, computed } from 'vue';
 
 const icons = ref(null);
@@ -88,4 +88,4 @@ onMounted(() => {
         color: var(--text-color-secondary);
     }
 }
-</style>
+</style> -->

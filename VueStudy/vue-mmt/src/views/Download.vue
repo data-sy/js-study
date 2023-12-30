@@ -52,8 +52,8 @@ const closeConfirmation = () => {
 };
 
 // 다운로드
-const imageUrl = 'demo/images/galleria/galleria11.jpg';
-const imageRef = ref(null);
+// const imageUrl = 'demo/images/galleria/galleria11.jpg';
+// const imageRef = ref(null);
 
 // 클릭 시 담길 값이야 (ref에서 꺼낼때는 value 사용하기)
 const testId = 123;

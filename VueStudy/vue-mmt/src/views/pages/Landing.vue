@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useLayout } from '@/layout/composables/layout';
 import { computed } from 'vue';
 import AppConfig from '@/layout/AppConfig.vue';
@@ -454,4 +454,4 @@ const logoUrl = computed(() => {
         max-width: 100%;
     }
 }
-</style> -->
+</style> --> -->

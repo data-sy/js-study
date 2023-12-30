@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 
 const items = ref([
@@ -332,4 +332,4 @@ const load = (index) => {
         margin-bottom: 0;
     }
 }
-</style>
+</style> -->

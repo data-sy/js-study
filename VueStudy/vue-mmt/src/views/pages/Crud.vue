@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { FilterMatchMode } from 'primevue/api';
 import { ref, onMounted, onBeforeMount } from 'vue';
 import ProductService from '@/service/ProductService';
@@ -313,4 +313,4 @@ const initFilters = () => {
     </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss"></style> -->

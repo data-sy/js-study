@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, onMounted } from 'vue';
 import CountryService from '@/service/CountryService';
 
@@ -112,4 +112,4 @@ const searchCountry = (event) => {
             </div>
         </div>
     </div>
-</template>
+</template> -->

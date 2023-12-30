@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 import CustomerService from '@/service/CustomerService';
 import ProductService from '@/service/ProductService';
@@ -377,4 +377,4 @@ const calculateCustomerTotal = (name) => {
 ::v-deep(.p-datatable-scrollable .p-frozen-column) {
     font-weight: bold;
 }
-</style>
+</style> -->

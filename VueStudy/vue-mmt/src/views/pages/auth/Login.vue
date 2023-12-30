@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useLayout } from '@/layout/composables/layout';
 import { ref, computed } from 'vue';
 import AppConfig from '@/layout/AppConfig.vue';
@@ -83,4 +83,4 @@ const login = async () => {
     transform: scale(1.6);
     margin-right: 1rem;
 }
-</style>
+</style> -->

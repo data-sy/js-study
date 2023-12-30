@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, onBeforeMount, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useLayout } from '@/layout/composables/layout';
@@ -90,4 +90,4 @@ const checkActiveRoute = (item) => {
     </li>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped></style> -->

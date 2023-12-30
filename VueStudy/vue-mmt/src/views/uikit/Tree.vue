@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import NodeService from '@/service/NodeService';
 import { onMounted, ref } from 'vue';
 
@@ -34,4 +34,4 @@ onMounted(() => {
             </div>
         </div>
     </div>
-</template>
+</template> -->

@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, onMounted } from 'vue';
 import ProductService from '@/service/ProductService';
 
@@ -147,4 +147,4 @@ const onSortChange = (event) => {
             </div>
         </div>
     </div>
-</template>
+</template> -->

@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import ProductService from '@/service/ProductService';
 import { ref, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
@@ -184,4 +184,4 @@ const confirm = (event) => {
             </div>
         </div>
     </div>
-</template>
+</template> -->

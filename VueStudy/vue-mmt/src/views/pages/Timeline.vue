@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 
 const customEvents = ref([
@@ -152,4 +152,4 @@ const horizontalEvents = ref(['2020', '2021', '2022', '2023']);
         }
     }
 }
-</style>
+</style> -->

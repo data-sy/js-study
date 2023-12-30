@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 
 const dropdownItems = ref([
@@ -118,4 +118,4 @@ const dropdownItem = ref(null);
             </div>
         </div>
     </div>
-</template>
+</template> -->

@@ -117,7 +117,7 @@ const toggleValue = ref(false);
                         src/assets에 담아뒀을 때 목록 내 모든 이미지 보기 테스트
                         <img :src="img" v-for="img of images" :key="img" class="card col-6"/>
                     </div> -->
-                    <div>정답도 맘에 드는 템플릿 가져와서 사용하기</div>
+                    <div>정답도 맘에 드는 템플릿 가져와서 사용하기(2단으로)</div>
                     <div v-for="(item, index) in testDetail" :key="index" class="col-12">
                         <!-- index+1 표시 -->
                         <span>{{ index + 1 }}. </span>                        

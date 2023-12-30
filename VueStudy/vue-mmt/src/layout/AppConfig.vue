@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import RadioButton from 'primevue/radiobutton';
 import Button from 'primevue/button';
 import InputSwitch from 'primevue/inputswitch';
@@ -295,4 +295,4 @@ const applyScale = () => {
     </Sidebar>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped></style> -->

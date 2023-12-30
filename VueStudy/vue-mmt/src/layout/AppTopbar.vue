@@ -1,34 +1,34 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
-import { useLayout } from '@/layout/composables/layout';
+// import { useLayout } from '@/layout/composables/layout';
 import { useRouter } from 'vue-router';
 import { useApi } from '../composables/api.js';
 
 const api = useApi();
-const { layoutConfig, onMenuToggle } = useLayout();
+// const { layoutConfig, onMenuToggle } = useLayout();
 
-const outsideClickListener = ref(null);
-const topbarMenuActive = ref(false);
+// const outsideClickListener = ref(null);
+// const topbarMenuActive = ref(false);
 const router = useRouter();
 const loginDialog = ref(false);
 const submitted = ref(false);
 
-onMounted(() => {
-    bindOutsideClickListener();
-});
+// onMounted(() => {
+//     bindOutsideClickListener();
+// });
 
-onBeforeUnmount(() => {
-    unbindOutsideClickListener();
-});
+// onBeforeUnmount(() => {
+//     unbindOutsideClickListener();
+// });
 
 const logoUrl = computed(() => {
     return 'layout/images/logo-mmt4.png';
     // return `layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
 });
 
-const onTopBarMenuButton = () => {
-    topbarMenuActive.value = !topbarMenuActive.value;
-};
+// const onTopBarMenuButton = () => {
+//     topbarMenuActive.value = !topbarMenuActive.value;
+// };
 // data는 로그인 잘되는지 토큰 보는 거였으니 나중에 삭제
 const data = ref(null);
 const email = ref('');
@@ -59,7 +59,7 @@ const login = async () => {
 const onUserClick = () =>{
     // 로그인 되어 있다면 유저 페이지로 router.push
     // 로그인 되어 있지 않다면 다이얼로그로 로그인 창 띄우기
-    onTopBarMenuButton();
+    // onTopBarMenuButton();
     submitted.value = false;
     loginDialog.value = true;
     // // 다이얼로그 말고 페이지 사용 시
@@ -72,40 +72,40 @@ const goToSignup = () => {
   router.push({ name: 'signup' }); 
 };
 
-const onSettingsClick = () => {
-    topbarMenuActive.value = false;
-    router.push('/documentation');
-};
-const topbarMenuClasses = computed(() => {
-    return {
-        'layout-topbar-menu-mobile-active': topbarMenuActive.value
-    };
-});
+// const onSettingsClick = () => {
+//     topbarMenuActive.value = false;
+//     router.push('/documentation');
+// };
+// const topbarMenuClasses = computed(() => {
+//     return {
+//         'layout-topbar-menu-mobile-active': topbarMenuActive.value
+//     };
+// });
 
-const bindOutsideClickListener = () => {
-    if (!outsideClickListener.value) {
-        outsideClickListener.value = (event) => {
-            if (isOutsideClicked(event)) {
-                topbarMenuActive.value = false;
-            }
-        };
-        document.addEventListener('click', outsideClickListener.value);
-    }
-};
-const unbindOutsideClickListener = () => {
-    if (outsideClickListener.value) {
-        document.removeEventListener('click', outsideClickListener);
-        outsideClickListener.value = null;
-    }
-};
-const isOutsideClicked = (event) => {
-    if (!topbarMenuActive.value) return;
+// const bindOutsideClickListener = () => {
+//     if (!outsideClickListener.value) {
+//         outsideClickListener.value = (event) => {
+//             if (isOutsideClicked(event)) {
+//                 topbarMenuActive.value = false;
+//             }
+//         };
+//         document.addEventListener('click', outsideClickListener.value);
+//     }
+// };
+// const unbindOutsideClickListener = () => {
+//     if (outsideClickListener.value) {
+//         document.removeEventListener('click', outsideClickListener);
+//         outsideClickListener.value = null;
+//     }
+// };
+// const isOutsideClicked = (event) => {
+//     if (!topbarMenuActive.value) return;
 
-    const sidebarEl = document.querySelector('.layout-topbar-menu');
-    const topbarEl = document.querySelector('.layout-topbar-menu-button');
+//     const sidebarEl = document.querySelector('.layout-topbar-menu');
+//     const topbarEl = document.querySelector('.layout-topbar-menu-button');
 
-    return !(sidebarEl.isSameNode(event.target) || sidebarEl.contains(event.target) || topbarEl.isSameNode(event.target) || topbarEl.contains(event.target));
-};
+//     return !(sidebarEl.isSameNode(event.target) || sidebarEl.contains(event.target) || topbarEl.isSameNode(event.target) || topbarEl.contains(event.target));
+// };
 </script>
 
 <template>
@@ -115,28 +115,32 @@ const isOutsideClicked = (event) => {
             <span>My Math Teacher</span>
         </router-link>
 
-        <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
-            <i class="pi pi-bars"></i>
+        <button class="p-link layout-menu-button layout-topbar-button"> <!--@click="onMenuToggle()"-->
+            <!-- <i class="pi pi-bars"></i> -->
         </button>
 
-        <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
+        <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onUserClick()">
+            <i class="pi pi-user"></i>
+        </button>
+
+        <!-- <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
             <i class="pi pi-ellipsis-v"></i>
         </button>
 
-        <div class="layout-topbar-menu" :class="topbarMenuClasses">
-            <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
+        <div class="layout-topbar-menu" :class="topbarMenuClasses"> -->
+            <!-- <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
                 <i class="pi pi-calendar"></i>
                 <span>Calendar</span>
-            </button>
-            <button @click="onUserClick()" class="p-link layout-topbar-button">
+            </button> -->
+            <!-- <button @click="onUserClick()" class="p-link layout-topbar-button">
                 <i class="pi pi-user"></i>
                 <span>Profile</span>
-            </button>
-            <button @click="onSettingsClick()" class="p-link layout-topbar-button">
+            </button> -->
+            <!-- <button @click="onSettingsClick()" class="p-link layout-topbar-button">
                 <i class="pi pi-cog"></i>
                 <span>Settings</span>
-            </button>
-        </div>
+            </button> -->
+        <!-- </div> -->
 
         <Dialog v-model:visible="loginDialog" :style="{ width: '500px' }" :modal="true" class="p-fluid">
             <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">

@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 
 import AppMenuItem from './AppMenuItem.vue';
@@ -184,4 +184,4 @@ const model = ref([
     </ul>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped></style> -->

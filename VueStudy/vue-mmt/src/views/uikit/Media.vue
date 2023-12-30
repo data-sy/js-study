@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import ProductService from '@/service/ProductService';
 import PhotoService from '@/service/PhotoService';
 import { ref, onMounted } from 'vue';
@@ -102,4 +102,4 @@ onMounted(() => {
             </div>
         </div>
     </div>
-</template>
+</template> -->

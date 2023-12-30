@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useToast } from 'primevue/usetoast';
 
 const toast = useToast();
@@ -21,4 +21,4 @@ const onUpload = () => {
         </div>
         <Toast />
     </div>
-</template>
+</template> -->

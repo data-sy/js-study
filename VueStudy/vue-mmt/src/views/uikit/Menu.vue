@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 
 const menu = ref(null);
@@ -526,4 +526,4 @@ const onContextRightClick = (event) => {
             </div>
         </div>
     </div>
-</template>
+</template> -->
