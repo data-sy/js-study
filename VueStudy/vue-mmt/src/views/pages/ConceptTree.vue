@@ -59,7 +59,7 @@ const edgeColor = '#ced6e0';
 const nodeColor = '#57606f'; //글씨색??
 // activate 시 크기
 const nodeActiveSize = 15;
-const fontActiveSize = 15;
+const fontActiveSize = 11;
 const edgeActiveWidth = '4px';
 const arrowActiveScale = 1.2;
 // activate 시 색상
@@ -67,7 +67,7 @@ const nodeActiveColor = '#6466f1'; // 선택한 노드
 const fromColor = '#ff6348'; // 후수지식
 const toColor = '#1e90ff'; // 선수지식
 
-const setStyles = (target_cy, style) => {
+const setDimStyle = (target_cy, style) => {
     target_cy.nodes().forEach((target) => {
         target.style(style);
     });
@@ -110,27 +110,76 @@ const setFocus = (target_element, fromColor, toColor, edgeWidth, arrowScale) => 
     });
     target_element.neighborhood().each((e) => {
         // 이웃한 엣지와 노드
+        e.style('font-size', Math.max(parseFloat(e.style('font-size')), fontActiveSize));
+        e.style('color', nodeColor);
         e.style('opacity', 1);
     }
     );
 }
-// const setResetFocus = (target_cy) => {
-//     target_cy.nodes().forEach((target) => {
-//         target.style('background-color', nodeColor);
-//         target.style('width', nodeSize);
-//         target.style('height', nodeSize);
-//         target.style('font-size', fontSize);
-//         target.style('color', nodeColor);
-//         target.style('opacity', 1);
+const setResetFocus = (target_cy) => {
+    target_cy.nodes().forEach((target) => {
+        const originalColor = target.data('nodeMyColor');
+        target.style('background-color', originalColor);
+        target.style('width', nodeSize);
+        target.style('height', nodeSize);
+        target.style('font-size', fontSize);
+        target.style('color', nodeColor);
+        target.style('opacity', 1);
+    });
+    target_cy.edges().forEach(function (target) {
+        target.style('line-color', edgeColor);
+        target.style('target-arrow-color', edgeColor);
+        target.style('width', edgeWidth);
+        target.style('arrow-scale', arrowScale);
+        target.style('opacity', 1);
+    });
+}
+
+// 노드 속성에 따라 색상 변경
+const changeNodeColor = (cy) => {
+  cy.nodes().forEach(node => {
+      const nodeData = node.data();
+      const nodeMyColor = getNodeColor(nodeData); // 노드의 색상 결정 함수 호출
+      node.data('nodeMyColor', nodeMyColor); // 노드의 초기 색상을 저장
+      node.style('background-color', nodeMyColor);
+    }
+  );
+};
+// // 라벨의 위치 변경 (여러 상황에 유기적으로 대응할 수는 없어...)
+// const setLabelPositionBasedOnConnection = (cy) => {
+//     const processedNodes = new Set(); // 이미 처리된 노드를 추적하는 Set
+//     cy.nodes().forEach((node) => {
+//         if (processedNodes.has(node.id())) {
+//             return; // 이미 처리된 노드는 스킵
+//         }
+//         const neighbors = node.neighborhood().nodes(); // 노드의 이웃(neighborhood) 가져오기
+//         // console.log(neighbors);
+//         // 현재 노드의 텍스트 라벨 위치
+//         const currentNodeLabelPosition = parseInt(node.style('text-margin-y'));
+//         // 현재 노드의 텍스트가 위에 있는 경우
+//         if (currentNodeLabelPosition <= 0) {
+//             neighbors.forEach((neighbor) => {
+//                 // 이웃 노드의 텍스트 라벨 위치 확인 및 조정
+//                 if (!processedNodes.has(neighbor.id())) {
+//                     neighbor.style('text-margin-y', 16);
+//                     processedNodes.add(neighbor.id()); // 이웃 노드를 이미 처리된 노드로 추가
+//                 }
+//             });
+//             processedNodes.add(node.id()); // 현재 노드를 이미 처리된 노드로 추가
+//         }
+//         // 현재 노드의 텍스트가 아래에 있는 경우
+//         else {
+//             neighbors.forEach((neighbor) => {
+//                 // 이웃 노드의 텍스트 라벨 위치 확인 및 조정
+//                 if (!processedNodes.has(neighbor.id())) {
+//                     neighbor.style('text-margin-y', -1);
+//                     processedNodes.add(neighbor.id()); // 선행자 노드를 이미 처리된 노드로 추가
+//                 }
+//             });
+//             processedNodes.add(node.id()); // 현재 노드를 이미 처리된 노드로 추가
+//         }
 //     });
-//     target_cy.edges().forEach(function (target) {
-//         target.style('line-color', edgeColor);
-//         target.style('source-arrow-color', edgeColor);
-//         target.style('width', edgeWidth);
-//         target.style('arrow-scale', arrowScale);
-//         target.style('opacity', 1);
-//     });
-// }
+// };
 
 onMounted(() => {
   if (dataToSend) {
@@ -187,6 +236,9 @@ onMounted(() => {
             'font-size': fontSize,
             'color': nodeColor,
             'label': 'data(label)',
+            'text-margin-y': -2,
+            'text-wrap': 'wrap', // 텍스트 줄바꿈 설정
+            'text-max-width': '60px', // 텍스트 최대 가로 길이 설정
           }
         },
         {
@@ -205,16 +257,17 @@ onMounted(() => {
         name: 'klay',
         animate: false,
         gravityRangeCompound: 1.5, // 1.5
+        klay: {
+          spacing: 26, 
+        },
         fit: true, //레이아웃을 컨테이너에 맞게 자동 조정
         tile: true // 타일형 레이아웃 (노드를 격자로 배치)
       }
     });
     // 노드 속성에 따라 색상 변경
-    cy.nodes().forEach(node => {
-      const nodeData = node.data();
-      const nodeColor = getNodeColor(nodeData); // 노드의 색상 결정 함수 호출
-      node.style('background-color', nodeColor);
-    });
+    changeNodeColor(cy);
+    // // 라벨의 위치 변경
+    // setLabelPositionBasedOnConnection(cy);
 
     // 클릭한 id 추출 (상세보기에 뿌려주기 위해)
     cy.on('tap', 'node', (event) => {
@@ -225,7 +278,7 @@ onMounted(() => {
     // cy.on('tap', function (e) {});
     cy.on('tapstart mouseover', 'node', (e) => {
       // console.log("in");
-      setStyles(cy, {
+      setDimStyle(cy, {
         'background-color': dimColor,
         'line-color': dimColor,
         'source-arrow-color': dimColor,
@@ -235,12 +288,9 @@ onMounted(() => {
     });
     cy.on('tapend mouseout', 'node', (e) => {
       // console.log("out");
-      setStyles(e.cy, {
-        'background-color': nodeColor,
-        'line-color': dimColor,
-        'source-arrow-color': dimColor,
-        'color': dimColor
-      });
+      const node = e.target;
+      const originalColor = node.data('nodeMyColor');
+      setResetFocus(e.cy);
     });
   }
 });
