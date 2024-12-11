@@ -849,3 +849,42 @@ var 변수 = function(매개변수){
 
 <br/>
 <br/>
+
+
+# 8장 DOM
+
+### 8-1 문서 객체 모델(DOM) 이란?
+- 돔 DOM (Document Object Model 문서 객체 모델)
+  - 정의 : (웹 문서의 모든 요소를 자바스크립트를 이용하여 조작할 수 있도록) 객체를 사용해 문서를 해석하는 방법
+- DOM 트리
+  - 태그 : 요소(Element) 노드
+  - 태그가 품고 있는 텍스트 : 텍스트(Text) 노드
+  - 태그의 속성 : 속성(Attribute) 노드
+  - 주석 : 주석(Comment) 노드
+
+<br/>
+
+### 8-2 DOM **요소**에 접근하기
+- CSS의 선택자(Selector)를 사용해서 접근
+- getElementById()
+- getElementsByClassName()
+  - 반환 : HTMLCollection
+- getElementsByTagName()
+  - id, class 선택자가 없을 땐 태그 이름으로
+  - 반환 : HTMLCollection 객체 반환
+- querySelector(), querySelectorAll()
+  - id(#), class(.), 태그 이름 모두 사용 가능
+  - querySelectorAll() : NodeList 반환
+  - 둘 이상의 선택자 사용 가능 : 인덱스로는 한계 있을 때, 자식선택자(>) 사용하면 좋아
+
+<br/>
+
+### 8-3 DOM 요소의 **속성**에 접근하기
+- getAttribute(), setAttribute()
+  - getAttribute(속성) : 속성에 접근
+  - setAttribute(속성, 값) : 접근한 속성의 값 없다면 추가, 있다면 수정
+- setAttribute() 함수 대신, 속성 상용 가능
+
+<br/>
+<br/>
+
