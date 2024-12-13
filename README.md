@@ -957,3 +957,52 @@ var 변수 = function(매개변수){
 
 <br/>
 <br/>
+
+<br/>
+<br/>
+
+# 9장 폼
+
+- 폼(Form) : 사용자가 정보를 입력할 수 있게 만들어 놓은 웹 요소
+  - 예) 아이디, 비밀번호 입력. 주소지, 전화변호 입력
+  - 사용자가 폼 요소에 입력한 내용을 가져오기, 수정하기, 형식에 맞는지 확인하기 => 자바스크립트로 처리
+
+<br/>
+
+### 9-1 폼 요소에 접근하는 여러 가지 방법
+- id, class 값으로 접근 : queryselector
+- name 값으로 접근
+  - 폼 요소에서 사용하는 name값은 주로 id값과 같게 지정
+  - 폼의 name값, 폼 요소의 name값까지 계층을 따라 지정
+    ```
+    // 방법1
+    document.폼의name값.폼요소의name값
+
+    // 방법2
+    documnent.forms["폼의name값"].elements["폼요소의name값"]
+
+    // 방법3 (사용도 낮음. 폼 요소에 id, class, name 속성이 없을 때 사용)
+    // i번째 폼의 j번째 요소
+    document.forms[i].elements[j].value
+
+    ```
+- 텍스트 필드의 값 가져오기 : .value
+
+<br/>
+
+### 9-2 폼 요소에서 입력값 검증하기
+- 폼 밸리데이션 (Form Validation, 입력값 검증)
+  - 값이 입력되었는지
+  - 입력된 값이 정해진 조건에 맞는지 등
+- change 이벤트
+  - 목록이나 체크 상태 등이 변경되었을 때 이벤트 발생
+  - \<input>, \<select>, \<textarea> 태그에서 사용
+  - 텍스트 필드에 입력을 마치고 그 필드를 빠져나올 때 발생
+- select() 함수, focus() 함수
+  - select() 함수 : 텍스트 필드에 입력한 내용을 선택 (드래그)
+  - focus() 함수 : 해당 택스트 필드로 커서 이동
+- HTML5 \<input>태그 자체에서 폼을 검증하기 위한 여러 속성 有
+  - 예) autocomplete, autofocus, placeholder, required 등
+
+<br/>
+<br/>
